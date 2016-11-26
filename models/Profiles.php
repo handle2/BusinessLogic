@@ -22,7 +22,7 @@ class Profiles extends Collection{
     }
 
     public function search($search){
-        $profile = Profiles::find(array("conditions" => $search));
+        $profile = Profiles::find(array("conditions" => $search,"fields"=>["password" => 0]));
         return $profile;
     }
 
