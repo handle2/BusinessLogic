@@ -37,6 +37,16 @@ class Role
 
     }
 
+    public static function deleteRole($id){
+        $model = new Models\Roles();
+        $role = $model->create($id);
+        if($role->delete()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public static function searchRoles($search){
         $model = new Models\Roles();
         $setting = new Role();
