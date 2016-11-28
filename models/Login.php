@@ -17,7 +17,7 @@ class Login extends Collection
 
     }
 
-    public static function dumpResult($collection,$document){
+    public function dumpResult($collection,$document){
 
     }
 
