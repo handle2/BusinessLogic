@@ -9,6 +9,7 @@
 namespace Modules\BusinessLogic\ContentSettings;
 
 use Modules\BusinessLogic\Models as Models;
+use Phalcon\Mvc\Collection;
 
 class Right extends Base
 {
@@ -16,11 +17,13 @@ class Right extends Base
     public $name;
     public $code;
     public $type;
-
+    public $parent;
+    
     private function generateRight($obj){
         $right = new Right();
         $right->id = $obj->id;
         $right->name = $obj->name;
+        $right->parent = $obj->parent;
         $right->code = $obj->code;
         $right->type = $obj->type;
         return $right;
@@ -31,6 +34,7 @@ class Right extends Base
         $model = new Models\Rights();
         $right = empty($form->id)?$model->create():$model->create($form->id);
         $right->name = $form->name;
+        $right->parent = $form->parent;
         $right->code = $form->code;
         $right->type = $form->type;
         $right->save();
@@ -51,6 +55,13 @@ class Right extends Base
     public static function deleteRight($id){
         $model = new Models\Rights();
         $right = $model->create($id);
+        if($right->type == "group"){
+            $wole = $model->search(["parent"=>$right->code]);
+
+            foreach ($wole as $w){
+                self::deleteRight($w->id);
+            }
+        }
         if($right->delete()){
             return true;
         }else{
