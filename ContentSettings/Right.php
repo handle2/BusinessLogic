@@ -19,7 +19,7 @@ class Right extends Base
     public $type;
     public $parent;
     
-    private function generateRight($obj){
+    public function generate(Models\Rights $obj){
         $right = new Right();
         $right->id = $obj->id;
         $right->name = $obj->name;
@@ -29,44 +29,38 @@ class Right extends Base
         return $right;
     }
 
-    public static function createRight($form){
-        $setting = new Right();
-        $model = new Models\Rights();
-        $right = empty($form->id)?$model->create():$model->create($form->id);
-        $right->name = $form->name;
-        $right->parent = $form->parent;
-        $right->code = $form->code;
-        $right->type = $form->type;
-        $right->save();
-        return $setting->generateRight($right);
-    }
+    public function delete(){
 
-    public static function searchRights($search,$fields){
         $model = new Models\Rights();
-        $setting = new Right();
-        $roles = $model->search($search,$fields);
-        $arr = [];
-        foreach ($roles as $role){
-            $arr[] = $setting->generateRight($role);
-        }
-        return $arr;
-    }
-
-    public static function deleteRight($id){
-        $model = new Models\Rights();
-        $right = $model->create($id);
+        $right = $model->create($this->id);
         if($right->type == "group"){
             $wole = $model->search(["parent"=>$right->code]);
 
             foreach ($wole as $w){
-                self::deleteRight($w->id);
+                $model->delete($w->id);
             }
         }
         if($right->delete()){
+            unset($this);
             return true;
         }else{
             return false;
         }
+    }
 
+    public function save(){
+
+        $model = new Models\Rights();
+        $right = $model->create($this->id);
+        $right->id = $this->id;
+        $right->name = $this->name;
+        $right->parent = $this->parent;
+        $right->code = $this->code;
+        $right->type = $this->type;
+        if($right->save()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

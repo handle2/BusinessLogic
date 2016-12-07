@@ -38,7 +38,7 @@ class BaseSearch
     public function findFirst(){
         $params = $this->_readSearch();
         $result = $this->model->findFirst($params);
-        return $this->object->generateRole($result);
+        return $this->object->generate($result);
     }
 
     public function find(){
@@ -47,7 +47,7 @@ class BaseSearch
 
         $roles = [];
         foreach ($results as $result){
-            $roles[] = $this->object->generateRole($result);
+            $roles[] = $this->object->generate($result);
         }
 
         return $roles;
@@ -55,6 +55,6 @@ class BaseSearch
 
     public function create($id = false){
         $result = !$id?$this->model->create():$this->model->create($id);
-        return $this->object->generateRole($result);
+        return $this->object->generate($result);
     }
 }

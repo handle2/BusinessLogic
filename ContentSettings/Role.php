@@ -17,7 +17,7 @@ class Role
     public $id = null;
     public $rights = null;
     
-    public function generateRole(Models\Roles $obj){
+    public function generate(Models\Roles $obj){
         $role = new Role();
         $role->id = $obj->id;
         $role->name = $obj->name;

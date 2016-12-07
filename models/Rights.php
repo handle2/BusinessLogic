@@ -13,6 +13,12 @@ use Phalcon\Mvc\Collection;
 
 class Rights extends Collection
 {
+    public $id;
+    public $name;
+    public $code;
+    public $type;
+    public $parent;
+
     public function update(){
 
     }
