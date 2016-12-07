@@ -16,17 +16,17 @@ class Profile
     public $password;
     public $email;
     public $name;
-    public $level;
+    public $role;
     public $group;
 
     private function generateProfile($obj){
         $profile = new Profile();
         $profile->id = $obj->id;
         $profile->username = $obj->username;
-        $profile->password = $obj->password;
+        $profile->password = isset($obj->password)?$obj->password:null;
         $profile->email = $obj->email;
         $profile->name = $obj->name;
-        $profile->level = $obj->level;
+        $profile->role = $obj->role;
         $profile->group = $obj->group;
 
         return $profile;
@@ -41,7 +41,7 @@ class Profile
         $profile->password = $form['password'];
         $profile->email = $form['email'];
         $profile->name = $form['name'];
-        $profile->level = 1;
+        $profile->role = 'user';
         $profile->group = 0;
         $profile->save();
         return $p->generateProfile($profile);

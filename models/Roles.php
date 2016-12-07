@@ -10,6 +10,7 @@ class Roles extends Collection
     public $name;
     public $code;
     public $type;
+    public $rights;
 
     public function update(){
 
@@ -29,6 +30,7 @@ class Roles extends Collection
         $roles = new Roles();
         $seq = ContentSettings\Seqs::createSeq('roles');
         $roles->id = $seq->current;
+        $roles->save();
         return $roles;
     }
 

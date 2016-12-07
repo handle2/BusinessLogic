@@ -14,6 +14,7 @@ class Login extends Base
     public $id;
     public $hash;
     public $time;
+    public $userId;
 
 
     private function generateLogin($t){
@@ -21,6 +22,7 @@ class Login extends Base
         $login->id = $t->id;
         $login->hash = $t->hash;
         $login->time = $t->time;
+        $login->userId = $t->userId;
         return $login;
     }
 
@@ -33,6 +35,7 @@ class Login extends Base
         }
         $login->hash = $info['hash'];
         $login->ip = $info['ip'];
+        $login->userId = $info['id'];
         $date = new \DateTime();
         $date->modify('+7 day');
         $login->time = $date->getTimestamp();
