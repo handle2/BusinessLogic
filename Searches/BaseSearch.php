@@ -14,21 +14,22 @@ class BaseSearch
 {
     protected $model;
     protected $object;
+    protected $ids;
 
     protected function _readSearch(){
         $params = array();
         
-        if($this->id){
+        if(isset($this->id) && !empty($this->id)){
             $params['id'] = $this->id; 
         }
-        if($this->ids){
+        if(isset($this->ids) && !empty($this->ids)){
             //db.test.find({_id: {$in: ids}});
             $params['id'] = array('$in' => $this->ids);
         }
-        if($this->code){
+        if(isset($this->code) && !empty($this->ids)){
             $params['code'] = $this->code;
         }
-        if($this->name){
+        if(isset($this->name) && !empty($this->ids)){
             $params['name'] = $this->name;
         }
         

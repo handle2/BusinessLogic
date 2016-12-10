@@ -19,7 +19,7 @@ class Profile
     public $role;
     public $group;
 
-    private function generateProfile($obj){
+    public function generate($obj){
         $profile = new Profile();
         $profile->id = $obj->id;
         $profile->username = $obj->username;
@@ -44,7 +44,7 @@ class Profile
         $profile->role = 'user';
         $profile->group = 0;
         $profile->save();
-        return $p->generateProfile($profile);
+        return $p->generate($profile);
 
     }
     
@@ -54,7 +54,7 @@ class Profile
         $profiles = $model->search($search);
         $arr = [];
         foreach ($profiles as $profile){
-            $arr[] = $setting->generateProfile($profile);
+            $arr[] = $setting->generate($profile);
         }
         return $arr;
     }
@@ -64,7 +64,7 @@ class Profile
         $mp = new Models\Profiles();
         $profile = $mp->loginProfile($username, $password);
         if($profile){
-            return $cp->generateProfile($profile);
+            return $cp->generate($profile);
         }
         return false;
 

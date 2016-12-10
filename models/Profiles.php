@@ -37,6 +37,7 @@ class Profiles extends Collection{
         $seq = ContentSettings\Seqs::createSeq('profile');
         $profile = new Profiles();
         $profile->id = $seq->current;
+        $profile->save();
         return $profile;
     }
 }

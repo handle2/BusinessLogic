@@ -42,6 +42,7 @@ class Rights extends Collection
         $right = new Rights();
         $seq = ContentSettings\Seqs::createSeq('rights');
         $right->id = $seq->current;
+        $right->save();
         return $right;
     }
 }

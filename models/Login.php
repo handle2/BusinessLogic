@@ -32,6 +32,7 @@ class Login extends Collection
         $login = new Login();
         $seq = ContentSettings\Seqs::createSeq('login');
         $login->id = $seq->current;
+        $login->save();
         return $login;
     }
 
