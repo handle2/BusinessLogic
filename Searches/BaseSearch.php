@@ -37,7 +37,7 @@ class BaseSearch
     }
     
     public function findFirst(){
-        $params = $this->_readSearch();
+        $params = array('conditions'=>$this->_readSearch());
         $result = $this->model->findFirst($params);
         return $this->object->generate($result);
     }

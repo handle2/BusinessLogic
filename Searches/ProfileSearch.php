@@ -16,6 +16,7 @@ class ProfileSearch extends BaseSearch
 {
     public $id;
     public $username;
+    public $password;
     public $email;
     public $name;
     public $role;
@@ -39,6 +40,11 @@ class ProfileSearch extends BaseSearch
         if($this->username){
             $params['username'] = $this->username;
         }
+
+        if($this->password){
+            $params['password'] = $this->password;
+        }
+
         if($this->name){
             $params['name'] = $this->name;
         }
@@ -48,7 +54,7 @@ class ProfileSearch extends BaseSearch
         if($this->group){
             $params['group'] = $this->group;
         }
-
+        
         return $params;
     }
 }
