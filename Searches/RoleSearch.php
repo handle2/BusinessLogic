@@ -18,6 +18,7 @@ class RoleSearch extends BaseSearch
     public $type;
     public $name;
     public $excludeRoles;
+    public $roles;
     
     public static function createRoleSearch(){
         
@@ -37,6 +38,10 @@ class RoleSearch extends BaseSearch
                 $nope[] = array('code' => array('$ne' => $excludeRole));
             }
             $params['$and'] = $nope;
+        }
+
+        if($this->roles){
+            $params['code'] = array('$in' => $this->roles);
         }
 
         if($this->type){

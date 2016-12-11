@@ -16,6 +16,7 @@ class Role
     public $type = null;
     public $id = null;
     public $rights = null;
+    public $roles = null;
     
     public function generate(Models\Roles $obj){
         $role = new Role();
@@ -24,6 +25,7 @@ class Role
         $role->code = $obj->code;
         $role->type = $obj->type;
         $role->rights = $obj->rights?$obj->rights:[];
+        $role->roles = $obj->roles?$obj->roles:[];
         return $role;
     }
 
@@ -47,6 +49,7 @@ class Role
         $role->code = $this->code;
         $role->type = $this->type;
         $role->rights = $this->rights;
+        $role->roles = $this->roles;
         if($role->save()){
             return true;
         }else{

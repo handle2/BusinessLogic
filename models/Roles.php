@@ -11,6 +11,7 @@ class Roles extends Collection
     public $code;
     public $type;
     public $rights;
+    public $roles;
 
     public function update(){
 
