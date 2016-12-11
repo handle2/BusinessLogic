@@ -40,6 +40,10 @@ class RoleSearch extends BaseSearch
             $params['$and'] = $nope;
         }
 
+        if($this->code){
+            $params['code'] = $this->code;
+        }
+
         if($this->roles){
             $params['code'] = array('$in' => $this->roles);
         }
