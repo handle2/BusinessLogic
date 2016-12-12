@@ -18,6 +18,7 @@ class Rights extends Collection
     public $code;
     public $type;
     public $parent;
+    public $actions = [];
 
     public function update(){
 

@@ -20,6 +20,11 @@ class RightSearch extends BaseSearch
     public $name;
     public $parent;
 
+    public $controller;
+    public $action;
+    
+    public $ricsi;
+
     public static function createRightSearch(){
 
         $search = new RightSearch();
@@ -31,7 +36,13 @@ class RightSearch extends BaseSearch
 
     public function _readSearch(){
         $params = parent::_readSearch();
-
+        //{'actions':{'$elemMatch': {'controller':'right'}}}
+        if($this->action && $this->controller){
+            $action = array('actions'=> array('$elemMatch'=> array('action' => $this->action)));
+            $controller = array('actions'=> array('$elemMatch'=> array('controller' => $this->controller)));
+            $params['$and'] = [$action,$controller];
+        }
+        
         if($this->type){
             $params['type'] = $this->type;
         }

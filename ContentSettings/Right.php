@@ -18,6 +18,7 @@ class Right extends Base
     public $code;
     public $type;
     public $parent;
+    public $actions = [];
     
     public function generate(Models\Rights $obj){
         $right = new Right();
@@ -26,6 +27,7 @@ class Right extends Base
         $right->parent = $obj->parent;
         $right->code = $obj->code;
         $right->type = $obj->type;
+        $right->actions = $obj->actions;
         return $right;
     }
 
@@ -56,6 +58,7 @@ class Right extends Base
         $right->parent = $this->parent;
         $right->code = $this->code;
         $right->type = $this->type;
+        $right->actions = $this->actions;
         if($right->save()){
             return true;
         }else{
