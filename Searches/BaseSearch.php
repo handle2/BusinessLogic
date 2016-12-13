@@ -61,6 +61,6 @@ class BaseSearch
 
     public function create($id = false){
         $result = !$id?$this->model->create():$this->model->create($id);
-        return $this->object->generate($result);
+        return $result?$this->object->generate($result):false;
     }
 }

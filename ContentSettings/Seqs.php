@@ -24,13 +24,27 @@ class Seqs extends Base
             $seq->save();
         }
         $call = new Seqs();
-        return $call->generateSeq($seq);
+        return $call->generate($seq);
     }
 
-    private function generateSeq($obj){
+    public function generate($obj)
+    {
         $seq = new Seqs();
         $seq->name = $obj->name;
         $seq->current = $obj->current;
         return $seq;
     }
+
+    public function delete()
+    {
+        $model = new Models\Seqs();
+        $seq = $model->create($this->name);
+        if ($seq->delete()) {
+            unset($this);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
