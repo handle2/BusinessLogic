@@ -36,7 +36,7 @@ class Right extends Base
         $model = new Models\Rights();
         $right = $model->create($this->id);
         if($right->type == "group"){
-            $wole = $model->find(["parent"=>$right->code]);
+            $wole = $model->find(array('conditions'=>["parent"=>$right->code]));
             foreach ($wole as $w){
                 $w->delete();
             }
