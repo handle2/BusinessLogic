@@ -9,7 +9,7 @@
 namespace Modules\BusinessLogic\ContentSettings;
 use Modules\BusinessLogic\Models as Models;
 
-class Profile
+class Profile extends Base
 {
     public $id;
     public $username;

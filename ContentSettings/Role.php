@@ -9,7 +9,7 @@
 namespace Modules\BusinessLogic\ContentSettings;
 use Modules\BusinessLogic\Models;
 
-class Role
+class Role extends Base
 {
     public $name = null;
     public $code = null;

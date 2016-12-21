@@ -22,8 +22,6 @@ class RightSearch extends BaseSearch
 
     public $controller;
     public $action;
-    
-    public $ricsi;
 
     public static function createRightSearch(){
 
