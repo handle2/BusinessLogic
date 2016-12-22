@@ -2,19 +2,22 @@
 /**
  * Created by PhpStorm.
  * User: Krisz
- * Date: 2016.12.21.
- * Time: 15:47
+ * Date: 2016.12.22.
+ * Time: 19:29
  */
 
 namespace Modules\BusinessLogic\Models;
-
-
 use Modules\BusinessLogic\ContentSettings\Seqs;
 use Phalcon\Mvc\Collection;
 
-class Prodcateg extends Collection
+class Inputs extends Collection
 {
     public $id;
+    public $type;
+    public $url;
+    public $name;
+    public $item;
+    public $length;
 
     public function update(){
 
@@ -25,22 +28,22 @@ class Prodcateg extends Collection
     }
 
     public function search($search){
-        $prodcategs = Prodcateg::find(array("conditions" => $search,"fields"=>["password" => 0]));
-        return $prodcategs;
+        $inputs = Inputs::find(array("conditions" => $search));
+        return $inputs;
     }
 
     public function create($id = false){
         if($id){
-            $found = Prodcateg::findFirst(array("conditions" => array(
+            $found = Inputs::findFirst(array("conditions" => array(
                 'id' => $id
             )));
             return $found;
         }
 
-        $seq = Seqs::createSeq('prodcateg');
-        $prodcateg = new Prodcateg();
-        $prodcateg->id = $seq->current;
-        $prodcateg->save();
-        return $prodcateg;
+        $seq = Seqs::createSeq('inputs');
+        $input = new Inputs();
+        $input->id = $seq->current;
+        $input->save();
+        return $input;
     }
 }

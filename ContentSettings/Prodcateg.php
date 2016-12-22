@@ -2,33 +2,36 @@
 /**
  * Created by PhpStorm.
  * User: Krisz
- * Date: 2016.12.21.
- * Time: 15:45
+ * Date: 2016.12.22.
+ * Time: 19:29
  */
 
 namespace Modules\BusinessLogic\ContentSettings;
 
 
-class Prodcateg extends Base
+use Modules\BusinessLogic\Models\Prodcategs;
+
+class Prodcateg
 {
     public $id;
+    public $url;
+    public $name;
+    public $inputs;
 
-    public function generate(\Modules\BusinessLogic\Models\Prodcateg $obj){
+    public function generate(Prodcategs $obj){
         $prodcateg = new Prodcateg();
-        foreach ($obj as $key => $prop){
-            if($key != '_id'){
-                $prodcateg->{$key} = $prop;
-            }
-        }
+        $prodcateg->id = $obj->id;
+        $prodcateg->url = $obj->url;
+        $prodcateg->name = $obj->name;
+        $prodcateg->inputs = $obj->inputs;
         return $prodcateg;
     }
 
     public function delete(){
 
-        $model = new \Modules\BusinessLogic\Models\Prodcateg();
-        $prodcateg = $model->create($this->id);
-
-        if($prodcateg->delete()){
+        $model = new Prodcategs();
+        $input = $model->create($this->id);
+        if($input->delete()){
             unset($this);
             return true;
         }else{
@@ -38,13 +41,12 @@ class Prodcateg extends Base
 
     public function save(){
 
-        $model = new \Modules\BusinessLogic\Models\Prodcateg();
+        $model = new Prodcategs();
         $prodcateg = $model->create($this->id);
-        foreach ($this as $key => $prop){
-            if($key != '_id') {
-                $prodcateg->{$key} = $this->{$key};
-            }
-        }
+        $prodcateg->id = $this->id;
+        $prodcateg->url = $this->url;
+        $prodcateg->name = $this->name;
+        $prodcateg->inputs = $this->inputs;
         if($prodcateg->save()){
             return true;
         }else{
