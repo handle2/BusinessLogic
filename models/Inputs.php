@@ -16,7 +16,7 @@ class Inputs extends Collection
     public $type;
     public $url;
     public $name;
-    public $item;
+    public $children;
     public $length;
 
     public function update(){

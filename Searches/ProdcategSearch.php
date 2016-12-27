@@ -9,24 +9,20 @@
 namespace Modules\BusinessLogic\Search;
 
 
-use Modules\BusinessLogic\Models\Prodcateg;
+use Modules\BusinessLogic\Models\Prodcategs;
 use Modules\BusinessLogic\ContentSettings\Prodcateg as ProdObj;
 
 class ProdcategSearch extends BaseSearch
 {
     public $id;
-    public $code;
-    public $type;
+    public $url;
     public $name;
-    public $parent;
+    public $inputs;
 
-    public $controller;
-    public $action;
-
-    public static function createRightSearch(){
+    public static function createProdcategSearch(){
 
         $search = new ProdcategSearch();
-        $search->model = new Prodcateg();
+        $search->model = new Prodcategs();
         /**@var ProdObj $object*/
         $search->object = new ProdObj();
         return $search;

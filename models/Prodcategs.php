@@ -9,7 +9,7 @@
 namespace Modules\BusinessLogic\Models;
 
 
-use Modules\BusinessLogic\ContentSettings\Seqs;
+use Modules\BusinessLogic\ContentSettings\Seqs as Seq;
 use Phalcon\Mvc\Collection;
 
 class Prodcategs extends Collection
@@ -40,7 +40,7 @@ class Prodcategs extends Collection
             return $found;
         }
 
-        $seq = Seqs::createSeq('prodcategs');
+        $seq = Seq::createSeq('prodcategs');
         $input = new Prodcategs();
         $input->id = $seq->current;
         $input->save();

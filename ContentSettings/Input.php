@@ -17,7 +17,7 @@ class Input extends Base
     public $type;
     public $url;
     public $name;
-    public $item;
+    public $children;
     public $length;
 
     public function generate(Inputs $obj){
@@ -26,7 +26,7 @@ class Input extends Base
         $input->type = $obj->type;
         $input->url = $obj->url;
         $input->name = $obj->name;  
-        $input->item = $obj->item;
+        $input->children = $obj->children;
         $input->length = $obj->length;
         return $input;
     }
@@ -51,7 +51,7 @@ class Input extends Base
         $input->type = $this->type;
         $input->url = $this->url;
         $input->name = $this->name;
-        $input->item = $this->item;
+        $input->children = $this->children;
         $input->length = $this->length;
         if($input->save()){
             return true;
