@@ -49,7 +49,7 @@ class Input extends Base
         $input = $model->create($this->id);
         $input->id = $this->id;
         $input->type = $this->type;
-        $input->url = $this->url;
+        $input->url = $this->urlMakeup($this->url);
         $input->name = $this->name;
         $input->children = $this->children;
         $input->length = $this->length;

@@ -11,7 +11,7 @@ namespace Modules\BusinessLogic\ContentSettings;
 
 use Modules\BusinessLogic\Models\Prodcategs;
 
-class Prodcateg
+class Prodcateg extends Base
 {
     public $id;
     public $url;
@@ -44,7 +44,7 @@ class Prodcateg
         $model = new Prodcategs();
         $prodcateg = $model->create($this->id);
         $prodcateg->id = $this->id;
-        $prodcateg->url = $this->url;
+        $prodcateg->url = $this->urlMakeup($this->url);
         $prodcateg->name = $this->name;
         $prodcateg->inputs = $this->inputs;
         if($prodcateg->save()){

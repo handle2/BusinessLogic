@@ -14,6 +14,7 @@ use Modules\BusinessLogic\Models\Inputs;
 
 class InputSearch extends BaseSearch
 {
+    public $ids;
     public static function createInputSearch(){
 
         $search = new InputSearch();
