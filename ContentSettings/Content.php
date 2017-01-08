@@ -20,6 +20,7 @@ class Content extends Base
     public $text;
     public $lead;
     public $pictures;
+    public $pictureIds;
     
     public function generate(Contents $obj){
         $content = new Content();
@@ -29,7 +30,7 @@ class Content extends Base
         $content->name = $obj->name;
         $content->text = $obj->text;
         $content->lead = $obj->lead;
-        $content->pictures = $obj->pictures;
+        $content->pictureIds = $obj->pictureIds;
         
         return $content;
     }
@@ -56,7 +57,7 @@ class Content extends Base
         $content->name = $this->name;
         $content->text = $this->text;
         $content->lead = $this->lead;
-        $content->pictures = $this->pictures;
+        $content->pictureIds = $this->pictureIds;
         if($content->save()){
             return true;
         }else{

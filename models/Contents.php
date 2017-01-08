@@ -21,6 +21,7 @@ class Contents extends Collection
     public $text;
     public $lead;
     public $pictures;
+    public $pictureIds;
 
     public function update(){
 
