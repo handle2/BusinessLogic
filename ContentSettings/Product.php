@@ -12,6 +12,7 @@ use Modules\BusinessLogic\Models\Products;
 class Product extends Base
 {
     public $id;
+    public $pictureIds;
 
     public function generate(Products $obj){
         $product = new Product();

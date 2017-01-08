@@ -9,7 +9,7 @@
 namespace Modules\BusinessLogic\Models;
 
 
-use Modules\BusinessLogic\ContentSettings\Seqs;
+use Modules\BusinessLogic\ContentSettings\Seqs as DSeq;
 use Phalcon\Mvc\Collection;
 
 class Documents extends Collection
@@ -43,7 +43,7 @@ class Documents extends Collection
             return $found;
         }
 
-        $seq = Seqs::createSeq('documents');
+        $seq = DSeq::createSeq('documents');
         $discount = new Documents();
         $discount->id = $seq->current;
         $discount->save();
