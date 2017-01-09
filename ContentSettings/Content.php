@@ -21,6 +21,7 @@ class Content extends Base
     public $lead;
     public $pictures;
     public $pictureIds;
+    public $labels;
     
     public function generate(Contents $obj){
         $content = new Content();
@@ -31,6 +32,7 @@ class Content extends Base
         $content->text = $obj->text;
         $content->lead = $obj->lead;
         $content->pictureIds = $obj->pictureIds;
+        $content->labels = $obj->labels;
         
         return $content;
     }
@@ -50,6 +52,7 @@ class Content extends Base
     public function save(){
 
         $model = new Contents();
+        /**@var Contents $content*/
         $content = $model->create($this->id);
         $content->id = $this->id;
         $content->type = $this->type;
@@ -58,6 +61,7 @@ class Content extends Base
         $content->text = $this->text;
         $content->lead = $this->lead;
         $content->pictureIds = $this->pictureIds;
+        $content->labels = $this->labels;
         if($content->save()){
             return true;
         }else{

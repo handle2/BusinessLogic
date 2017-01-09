@@ -15,6 +15,8 @@ use Modules\BusinessLogic\Models\Contents;
 class ContentSearch extends BaseSearch
 {
     public $ids;
+    public $labels;
+
     public static function createContentSearch(){
 
         $search = new ContentSearch();
@@ -27,7 +29,10 @@ class ContentSearch extends BaseSearch
     public function _readSearch(){
 
         $params = parent::_readSearch();
-
+        if(isset($this->labels) && !empty($this->labels)){
+            //db.test.find({_id: {$in: ids}});
+            $params['labels'] = array('$in' => $this->labels);
+        }
         return $params;
     }
 }

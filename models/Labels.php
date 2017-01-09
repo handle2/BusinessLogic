@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: Krisz
- * Date: 2016.12.21.
- * Time: 15:47
+ * Date: 2017.01.09.
+ * Time: 9:32
  */
 
 namespace Modules\BusinessLogic\Models;
@@ -12,10 +12,11 @@ namespace Modules\BusinessLogic\Models;
 use Modules\BusinessLogic\ContentSettings\Seqs;
 use Phalcon\Mvc\Collection;
 
-class Products extends Collection
+class Labels extends Collection
 {
     public $id;
-    public $pictureIds; 
+    public $name;
+    public $code;
 
     public function update(){
 
@@ -26,22 +27,22 @@ class Products extends Collection
     }
 
     public function search($search){
-        $products = Products::find(array("conditions" => $search));
-        return $products;
+        $found = Labels::find(array("conditions" => $search));
+        return $found;
     }
 
     public function create($id = false){
         if($id){
-            $found = Products::findFirst(array("conditions" => array(
+            $found = Labels::findFirst(array("conditions" => array(
                 'id' => $id
             )));
             return $found;
         }
 
-        $seq = Seqs::createSeq('prodcateg');
-        $product = new Products();
-        $product->id = $seq->current;
-        $product->save();
-        return $product;
+        $seq = Seqs::createSeq('labels');
+        $self = new Labels();
+        $self->id = $seq->current;
+        $self->save();
+        return $self;
     }
 }
