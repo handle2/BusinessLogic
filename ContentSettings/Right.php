@@ -33,6 +33,8 @@ class Right extends Base
 
     public function delete(){
 
+        $this->deleteCache($this);
+        
         $model = new Models\Rights();
         $right = $model->create($this->id);
         if($right->type == "group"){
@@ -51,6 +53,8 @@ class Right extends Base
 
     public function save(){
 
+        $this->deleteCache($this);
+        
         $model = new Models\Rights();
         $right = $model->create($this->id);
         $right->id = $this->id;

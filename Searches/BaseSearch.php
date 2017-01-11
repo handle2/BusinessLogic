@@ -9,12 +9,23 @@
 namespace Modules\BusinessLogic\Search;
 
 use Modules\BusinessLogic\Models;
+use Phalcon\DI;
 
 class BaseSearch
 {
+    protected $redis;
+
     protected $model;
     protected $object;
     protected $ids;
+
+    /**
+     * cache kulcs
+     * @var string
+     */
+
+    private $onCache = true;
+    private $cacheType = "list";
 
     protected function _readSearch(){
         $params = array();
@@ -48,6 +59,23 @@ class BaseSearch
     }
 
     public function find(){
+
+        // először megnézzük ,hogy van-e a cacheban ha van akkor visszaadja $this->checkCache('model név+list stb')
+
+        /**@var \Predis\Client $cache*/
+        $cache = $this->createRedis();
+
+        $objectName = explode('\\',get_class($this->object));
+
+        $cacheKey = $this->cacheType.'_'.end($objectName);
+
+        if($cache->exists($cacheKey) && $this->onCache)
+        {
+            return json_decode($cache->get($cacheKey));
+        }
+
+        // ha ide jut itt mindig lesz egy cache mentés
+
         $params = array('conditions'=>$this->_readSearch());
         $results = $this->model->find($params);
 
@@ -55,12 +83,49 @@ class BaseSearch
         foreach ($results as $result){
             $roles[] = $this->object->generate($result);
         }
+        
+        if($this->onCache){
+            $cache->set($cacheKey,json_encode($roles));
+            $cache->expire($cacheKey,3600*24*7);
+        }
 
         return $roles;
     }
 
     public function create($id = false){
+
+        if(!$id){
+            /**@var \Predis\Client $cache*/
+            $cache = $this->createRedis();
+
+            $objectName = explode('\\',get_class($this->object));
+
+            $cacheKey = $this->cacheType.'_'.end($objectName);
+
+            $cache->del([$cacheKey]);
+        }
+
+
+
         $result = !$id?$this->model->create():$this->model->create($id);
         return $result?$this->object->generate($result):false;
+    }
+
+    /**
+     * Ezzel lehet módosítani a lekért adatok cache kulcsát
+     * @param $name
+     */
+    public function setCacheType($name){
+        $this->cacheType = $name;
+    }
+
+    public function disableCache(){
+        $this->onCache = false;
+    }
+    private function createRedis(){
+
+        $di = DI::getDefault();
+        return $di['redis'];
+
     }
 }

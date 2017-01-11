@@ -26,6 +26,8 @@ class Product extends Base
 
     public function delete(){
 
+        $this->deleteCache($this);
+        
         $model = new Products();
         $product = $model->create($this->id);
 
@@ -39,6 +41,8 @@ class Product extends Base
 
     public function save(){
 
+        $this->deleteCache($this);
+        
         $model = new Products();
         $product = $model->create($this->id);
         foreach ($this as $key => $prop){

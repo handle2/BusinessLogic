@@ -31,6 +31,9 @@ class Role extends Base
 
 
     public function delete(){
+        
+        $this->deleteCache($this);
+
         $model = new Models\Roles();
         $role = $model->create($this->id);
         if($role->delete()){
@@ -42,6 +45,8 @@ class Role extends Base
     }
 
     public function save(){
+
+        $this->deleteCache($this);
 
         $model = new Models\Roles();
         $role = $model->create($this->id);

@@ -37,6 +37,7 @@ class Seqs extends Base
 
     public function delete()
     {
+        $this->deleteCache($this);
         $model = new Models\Seqs();
         $seq = $model->create($this->name);
         if ($seq->delete()) {

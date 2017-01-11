@@ -39,6 +39,8 @@ class Content extends Base
 
     public function delete(){
 
+        $this->deleteCache($this);
+
         $model = new Contents();
         $content = $model->create($this->id);
         if($content->delete()){
@@ -50,6 +52,8 @@ class Content extends Base
     }
 
     public function save(){
+
+        $this->deleteCache($this);
 
         $model = new Contents();
         /**@var Contents $content*/

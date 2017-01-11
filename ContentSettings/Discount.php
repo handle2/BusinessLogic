@@ -31,6 +31,8 @@ class Discount extends Base
 
     public function delete(){
 
+        $this->deleteCache($this);
+        
         $model = new Discounts();
         $discount = $model->create($this->id);
         if($discount->delete()){
@@ -43,6 +45,8 @@ class Discount extends Base
 
     public function save(){
 
+        $this->deleteCache($this);
+        
         $model = new Discounts();
         $discount = $model->create($this->id);
         $discount->id = $this->id;

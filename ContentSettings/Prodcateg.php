@@ -29,6 +29,8 @@ class Prodcateg extends Base
 
     public function delete(){
 
+        $this->deleteCache($this);
+        
         $model = new Prodcategs();
         $input = $model->create($this->id);
         if($input->delete()){
@@ -41,6 +43,8 @@ class Prodcateg extends Base
 
     public function save(){
 
+        $this->deleteCache($this);
+        
         $model = new Prodcategs();
         $prodcateg = $model->create($this->id);
         $prodcateg->id = $this->id;

@@ -35,6 +35,8 @@ class Document extends Base
 
     public function delete(){
 
+        $this->deleteCache($this);
+        
         $model = new Documents();
         $document = $model->create($this->id);
         if($document->delete()){
@@ -47,6 +49,8 @@ class Document extends Base
 
     public function save(){
 
+        $this->deleteCache($this);
+        
         $model = new Documents();
         $document = $model->create($this->id);
         $document->id = $this->id;

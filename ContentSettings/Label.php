@@ -27,6 +27,8 @@ class Label extends Base
 
     public function delete(){
 
+        $this->deleteCache($this);
+        
         $model = new Labels();
         $self = $model->create($this->id);
         if($self->delete()){
@@ -39,6 +41,8 @@ class Label extends Base
 
     public function save(){
 
+        $this->deleteCache($this);
+        
         $model = new Labels();
         $self = $model->create($this->id);
         $self->id = $this->id;

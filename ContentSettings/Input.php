@@ -33,6 +33,8 @@ class Input extends Base
 
     public function delete(){
 
+        $this->deleteCache($this);
+        
         $model = new Inputs();
         $input = $model->create($this->id);
         if($input->delete()){
@@ -45,6 +47,8 @@ class Input extends Base
 
     public function save(){
 
+        $this->deleteCache($this);
+        
         $model = new Inputs();
         $input = $model->create($this->id);
         $input->id = $this->id;
