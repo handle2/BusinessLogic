@@ -19,7 +19,7 @@ class Profile extends Base
     public $role;
     public $group;
 
-    public function generate($obj){
+    public function generate($obj,$lang){
         $profile = new Profile();
         $profile->id = $obj->id;
         $profile->username = $obj->username;

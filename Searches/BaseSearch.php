@@ -18,6 +18,8 @@ class BaseSearch
     protected $model;
     protected $object;
     protected $ids;
+    
+    public $lang;
 
     /**
      * cache kulcs
@@ -51,7 +53,7 @@ class BaseSearch
         $params = array('conditions'=>$this->_readSearch());
         $result = $this->model->findFirst($params);
         if($result){
-            return $this->object->generate($result);
+            return $this->object->generate($result,false);
         }else{
             return false;
         }
@@ -67,7 +69,7 @@ class BaseSearch
 
         $objectName = explode('\\',get_class($this->object));
 
-        $cacheKey = $this->cacheType.'_'.end($objectName);
+        $cacheKey = $this->cacheType.'_'.$this->lang.'_'.end($objectName);
 
         if($cache->exists($cacheKey) && $this->onCache)
         {
@@ -79,17 +81,17 @@ class BaseSearch
         $params = array('conditions'=>$this->_readSearch());
         $results = $this->model->find($params);
 
-        $roles = [];
+        $items = [];
         foreach ($results as $result){
-            $roles[] = $this->object->generate($result);
+            $items[] = $this->object->generate($result,$this->lang);
         }
         
         if($this->onCache){
-            $cache->set($cacheKey,json_encode($roles));
+            $cache->set($cacheKey,json_encode($items));
             $cache->expire($cacheKey,3600*24*7);
         }
 
-        return $roles;
+        return $items;
     }
 
     public function create($id = false){
@@ -108,7 +110,7 @@ class BaseSearch
 
 
         $result = !$id?$this->model->create():$this->model->create($id);
-        return $result?$this->object->generate($result):false;
+        return $result?$this->object->generate($result,$this->lang):false;
     }
 
     /**

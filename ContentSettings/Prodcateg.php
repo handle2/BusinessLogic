@@ -18,11 +18,11 @@ class Prodcateg extends Base
     public $name;
     public $inputs;
 
-    public function generate(Prodcategs $obj){
+    public function generate(Prodcategs $obj,$lang){
         $prodcateg = new Prodcateg();
         $prodcateg->id = $obj->id;
-        $prodcateg->url = $obj->url;
-        $prodcateg->name = $obj->name;
+        $prodcateg->url = isset($obj->{$lang}['url'])?$obj->{$lang}['url']:$obj->url;
+        $prodcateg->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;
         $prodcateg->inputs = $obj->inputs;
         return $prodcateg;
     }

@@ -19,13 +19,13 @@ class Discount extends Base
     public $name;
     public $value;
 
-    public function generate(Discounts $obj){
+    public function generate(Discounts $obj,$lang){
         $discount = new Discount();
         $discount->id = $obj->id;
-        $discount->type = $obj->type;
-        $discount->url = $obj->url;
-        $discount->name = $obj->name;
-        $discount->value = $obj->value;
+        $discount->type = isset($obj->{$lang}['type'])?$obj->{$lang}['type']:$obj->type;
+        $discount->url = isset($obj->{$lang}['url'])?$obj->{$lang}['url']:$obj->url;
+        $discount->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;
+        $discount->value = isset($obj->{$lang}['value'])?$obj->{$lang}['value']:$obj->value;
         return $discount;
     }
 

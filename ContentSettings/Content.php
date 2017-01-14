@@ -23,16 +23,17 @@ class Content extends Base
     public $pictureIds;
     public $labels;
     
-    public function generate(Contents $obj){
+    public function generate(Contents $obj,$lang){
+
         $content = new Content();
         $content->id = $obj->id;
-        $content->type = $obj->type;
-        $content->url = $obj->url;
-        $content->name = $obj->name;
-        $content->text = $obj->text;
-        $content->lead = $obj->lead;
+        $content->type = isset($obj->{$lang}['type'])?$obj->{$lang}['type']:$obj->type;
+        $content->url = isset($obj->{$lang}['url'])?$obj->{$lang}['url']:$obj->url;
+        $content->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;
+        $content->text = isset($obj->{$lang}['text'])?$obj->{$lang}['text']:$obj->text;
+        $content->lead = isset($obj->{$lang}['lead'])?$obj->{$lang}['lead']:$obj->lead;
         $content->pictureIds = $obj->pictureIds;
-        $content->labels = $obj->labels;
+        $content->labels = isset($obj->{$lang}['labels'])?$obj->{$lang}['labels']:$obj->labels;
         
         return $content;
     }

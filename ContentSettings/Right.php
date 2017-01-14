@@ -20,14 +20,14 @@ class Right extends Base
     public $parent;
     public $actions = [];
     
-    public function generate(Models\Rights $obj){
+    public function generate(Models\Rights $obj,$lang){
         $right = new Right();
         $right->id = $obj->id;
-        $right->name = $obj->name;
-        $right->parent = $obj->parent;
-        $right->code = $obj->code;
-        $right->type = $obj->type;
-        $right->actions = $obj->actions;
+        $right->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;
+        $right->parent = isset($obj->{$lang}['parent'])?$obj->{$lang}['parent']:$obj->parent;
+        $right->code = isset($obj->{$lang}['code'])?$obj->{$lang}['code']:$obj->code;
+        $right->type = isset($obj->{$lang}['type'])?$obj->{$lang}['type']:$obj->type;
+        $right->actions = isset($obj->{$lang}['actions'])?$obj->{$lang}['actions']:$obj->actions;
         return $right;
     }
 

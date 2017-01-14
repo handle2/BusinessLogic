@@ -18,12 +18,12 @@ class Role extends Base
     public $rights = null;
     public $roles = null;
     
-    public function generate(Models\Roles $obj){
+    public function generate(Models\Roles $obj,$lang){
         $role = new Role();
         $role->id = $obj->id;
-        $role->name = $obj->name;
-        $role->code = $obj->code;
-        $role->type = $obj->type;
+        $role->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;
+        $role->code = isset($obj->{$lang}['code'])?$obj->{$lang}['code']:$obj->code;
+        $role->type = isset($obj->{$lang}['type'])?$obj->{$lang}['type']:$obj->type;
         $role->rights = $obj->rights?$obj->rights:[];
         $role->roles = $obj->roles?$obj->roles:[];
         return $role;

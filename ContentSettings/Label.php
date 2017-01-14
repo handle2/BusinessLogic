@@ -17,11 +17,11 @@ class Label extends Base
     public $name;
     public $code;
 
-    public function generate(Labels $obj){
+    public function generate(Labels $obj,$lang){
         $self = new Label();
         $self->id = $obj->id;
-        $self->name = $obj->name;
-        $self->code = $obj->code;
+        $self->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;
+        $self->code = isset($obj->{$lang}['code'])?$obj->{$lang}['code']:$obj->code;
         return $self;
     }
 

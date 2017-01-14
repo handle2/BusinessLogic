@@ -21,13 +21,13 @@ class Document extends Base
     public $type;
     public $size;
     
-    public function generate(Documents $obj){
+    public function generate(Documents $obj,$lang){
         $document = new Document();
         $document->id = $obj->id;
         $document->sourceImage = $obj->sourceImage;
         $document->croppedImage = $obj->croppedImage;
         $document->bounds = $obj->bounds;
-        $document->name = $obj->name;
+        $document->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;
         $document->type = $obj->type;
         $document->size = $obj->size;
         return $document;
