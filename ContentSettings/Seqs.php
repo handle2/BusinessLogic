@@ -10,6 +10,10 @@ class Seqs extends Base
 
     public $name;
 
+    /**
+     * @param $name
+     * @return Seqs
+     */
     public static function createSeq($name){
         $sModel = new Models\Seqs();
         $seq = $sModel->create($name);
@@ -27,6 +31,10 @@ class Seqs extends Base
         return $call->generate($seq);
     }
 
+    /**
+     * @param $obj
+     * @return Seqs
+     */
     public function generate($obj)
     {
         $seq = new Seqs();
@@ -35,6 +43,9 @@ class Seqs extends Base
         return $seq;
     }
 
+    /**
+     * @return bool
+     */
     public function delete()
     {
         $this->deleteCache($this);

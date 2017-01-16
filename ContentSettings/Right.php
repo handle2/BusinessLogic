@@ -14,13 +14,24 @@ use Phalcon\Mvc\Collection;
 class Right extends Base
 {
     public $id;
-    public $name;
-    public $code;
-    public $type;
-    public $parent;
-    public $actions = [];
-    public $langs;
     
+    public $name;
+    
+    public $code;
+    
+    public $type;
+    
+    public $parent;
+    
+    public $actions = [];
+    
+    public $langs;
+
+    /**
+     * @param Models\Rights $obj
+     * @param $lang
+     * @return Right
+     */
     public function generate(Models\Rights $obj,$lang){
         $right = new Right();
         $right->id = $obj->id;
@@ -34,6 +45,9 @@ class Right extends Base
         return $right;
     }
 
+    /**
+     * @return bool
+     */
     public function delete(){
 
         $this->deleteCache($this);
@@ -55,6 +69,9 @@ class Right extends Base
         }
     }
 
+    /**
+     * @return bool
+     */
     public function save(){
 
         $this->deleteCache($this);

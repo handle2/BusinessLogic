@@ -12,13 +12,24 @@ use Modules\BusinessLogic\Models as Models;
 class Profile extends Base
 {
     public $id;
+    
     public $username;
+    
     public $password;
+    
     public $email;
+    
     public $name;
+    
     public $role;
+    
     public $group;
 
+    /**
+     * @param $obj
+     * @param $lang
+     * @return Profile
+     */
     public function generate($obj,$lang){
         $profile = new Profile();
         $profile->id = $obj->id;
@@ -32,6 +43,11 @@ class Profile extends Base
         return $profile;
     }
 
+    /**
+     * @param $username
+     * @param $password
+     * @return bool|Profile
+     */
     public static function login($username, $password){
         $cp = new Profile();
         $mp = new Models\Profiles();

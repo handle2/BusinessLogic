@@ -13,12 +13,35 @@ use Phalcon\DI;
 
 class BaseSearch
 {
+    /**
+     * a redis objektumot
+     * @var $redis
+     */
     protected $redis;
 
+    /**
+     * Ebbe kerül bele az aktuális adatbázis model
+     * @var $model
+     */
     protected $model;
+
+    /**
+     * Ebbe kerül bele a az aktuális contentSetting objektum
+     * @var $object
+     */
     protected $object;
+
+    /**
+     * multiple id query
+     * @var $ids
+     */
     protected $ids;
-    
+
+
+    /**
+     * aktuális nyelv
+     * @var $lang
+     */
     public $lang;
 
     /**
@@ -28,6 +51,11 @@ class BaseSearch
 
     private $onCache = true;
     private $cacheType = "list";
+
+    /**
+     * a basic keresési feltételeket ő állítja össze
+     * @return array
+     */
 
     protected function _readSearch(){
         $params = array();
@@ -48,7 +76,12 @@ class BaseSearch
         
         return $params;
     }
-    
+
+    /**
+     * a keresési feltételeknek megfelelően kikér egy objektumot az adatbázisból
+     * @return bool
+     */
+
     public function findFirst(){
         $params = array('conditions'=>$this->_readSearch());
         $result = $this->model->findFirst($params);
@@ -59,6 +92,11 @@ class BaseSearch
         }
 
     }
+
+    /**
+     * a keresési feltételeknek megfelelően kikér egy tömböt az adatbázisból
+     * @return array|mixed
+     */
 
     public function find(){
 
@@ -96,6 +134,12 @@ class BaseSearch
         return $items;
     }
 
+    /**
+     * Ha van id kikér egy objektumot az adatbázisból, ha nincs akkor létrehoz egyet
+     * @param bool $id
+     * @return bool
+     */
+
     public function create($id = false){
 
         if(!$id){
@@ -123,9 +167,19 @@ class BaseSearch
         $this->cacheType = $name;
     }
 
+    /**
+     * ezzel kapcsoljuk ki a cachet
+     */
+
     public function disableCache(){
         $this->onCache = false;
     }
+
+    /**
+     * ezzel érjük el a redist
+     * @return mixed
+     */
+
     private function createRedis(){
 
         $di = DI::getDefault();

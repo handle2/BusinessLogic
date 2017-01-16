@@ -14,16 +14,32 @@ use Modules\BusinessLogic\Models\Contents;
 class Content extends Base
 {
     public $id;
-    public $type;
-    public $url;
-    public $name;
-    public $text;
-    public $lead;
-    public $pictures;
-    public $pictureIds;
-    public $labels;
-    public $langs;
     
+    public $type;
+    
+    public $url;
+    
+    public $name;
+    
+    public $text;
+    
+    public $lead;
+    
+    public $pictures;
+    
+    public $pictureIds;
+    
+    public $labels;
+    
+    public $langs;
+
+
+    /**
+     * Generálás
+     * @param Contents $obj
+     * @param $lang
+     * @return Content
+     */
     public function generate(Contents $obj,$lang){
 
         $content = new Content();
@@ -41,6 +57,10 @@ class Content extends Base
         return $content;
     }
 
+    /**
+     * Törlés
+     * @return bool
+     */
     public function delete(){
 
         $this->deleteCache($this);
@@ -55,6 +75,10 @@ class Content extends Base
         }
     }
 
+    /**
+     * Mentés
+     * @return bool
+     */
     public function save(){
 
         $this->deleteCache($this);

@@ -16,9 +16,14 @@ class LabelSearch extends BaseSearch
 {
 
     public $name;
+    
     public $code;
+    
     public $ids;
 
+    /**
+     * @return LabelSearch
+     */
     public static function createLabelSearch(){
 
         $search = new LabelSearch();
@@ -28,6 +33,9 @@ class LabelSearch extends BaseSearch
         return $search;
     }
 
+    /**
+     * @return array
+     */
     public function _readSearch(){
 
         $params = parent::_readSearch();

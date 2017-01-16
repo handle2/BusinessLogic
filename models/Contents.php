@@ -15,16 +15,28 @@ use Phalcon\Mvc\Collection;
 class Contents extends Collection
 {
     public $id;
+    
     public $type;
+    
     public $url;
+    
     public $name;
+    
     public $text;
+    
     public $lead;
+    
     public $pictures;
+    
     public $pictureIds;
+    
     public $labels;
+    
     public $langs;
 
+    /**
+     * 
+     */
     public function update(){
 
     }
@@ -33,11 +45,19 @@ class Contents extends Collection
 
     }
 
+    /**
+     * @param $search
+     * @return array
+     */
     public function search($search){
         $contents = Contents::find(array("conditions" => $search));
         return $contents;
     }
 
+    /**
+     * @param bool $id
+     * @return array|Contents
+     */
     public function create($id = false){
         if($id){
             $found = Contents::findFirst(array("conditions" => array(

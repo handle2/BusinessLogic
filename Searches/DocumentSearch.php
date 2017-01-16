@@ -16,10 +16,16 @@ class DocumentSearch extends BaseSearch
 {
     
     public $name;
-    public $type;
-    public $size;
-    public $ids;
     
+    public $type;
+    
+    public $size;
+    
+    public $ids;
+
+    /**
+     * @return DocumentSearch
+     */
     public static function createDocumentSearch(){
 
         $search = new DocumentSearch();
@@ -29,6 +35,9 @@ class DocumentSearch extends BaseSearch
         return $search;
     }
 
+    /**
+     * @return array
+     */
     public function _readSearch(){
 
         $params = parent::_readSearch();

@@ -15,13 +15,22 @@ use Modules\BusinessLogic\Models\Profiles;
 class ProfileSearch extends BaseSearch
 {
     public $id;
+    
     public $username;
+    
     public $password;
+    
     public $email;
+    
     public $name;
+    
     public $role;
+    
     public $group;
 
+    /**
+     * @return ProfileSearch
+     */
     public static function createProfileSearch(){
 
         $search = new ProfileSearch();
@@ -31,6 +40,9 @@ class ProfileSearch extends BaseSearch
         return $search;
     }
 
+    /**
+     * @return array
+     */
     public function _readSearch(){
         $params = parent::_readSearch();
 

@@ -14,7 +14,12 @@ use Modules\BusinessLogic\Models\Inputs;
 
 class InputSearch extends BaseSearch
 {
+    
     public $ids;
+
+    /**
+     * @return InputSearch
+     */
     public static function createInputSearch(){
 
         $search = new InputSearch();
@@ -24,6 +29,9 @@ class InputSearch extends BaseSearch
         return $search;
     }
 
+    /**
+     * @return array
+     */
     public function _readSearch(){
 
         $params = parent::_readSearch();

@@ -14,13 +14,22 @@ use Phalcon\Mvc\Collection;
 class Rights extends Collection
 {
     public $id;
+    
     public $name;
+    
     public $code;
+    
     public $type;
+    
     public $parent;
+    
     public $actions = [];
+    
     public $langs;
 
+    /**
+     * 
+     */
     public function update(){
 
     }
@@ -29,11 +38,20 @@ class Rights extends Collection
 
     }
 
+    /**
+     * @param $search
+     * @param array $fields
+     * @return array
+     */
     public function search($search,$fields = []){
         $rights = Rights::find(array("conditions" => $search,"fields"=>$fields));
         return $rights;
     }
 
+    /**
+     * @param bool $id
+     * @return array|Rights
+     */
     public function create($id = false){
         if($id){
             $found = Rights::findFirst(array("conditions" => array(

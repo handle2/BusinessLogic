@@ -15,11 +15,18 @@ use Phalcon\Mvc\Collection;
 class Prodcategs extends Collection
 {
     public $id;
+    
     public $url;
+    
     public $name;
+    
     public $inputs;
+    
     public $langs;
 
+    /**
+     * 
+     */
     public function update(){
 
     }
@@ -28,11 +35,19 @@ class Prodcategs extends Collection
 
     }
 
+    /**
+     * @param $search
+     * @return array
+     */
     public function search($search){
         $inputs = Prodcategs::find(array("conditions" => $search));
         return $inputs;
     }
 
+    /**
+     * @param bool $id
+     * @return array|Prodcategs
+     */
     public function create($id = false){
         if($id){
             $found = Prodcategs::findFirst(array("conditions" => array(

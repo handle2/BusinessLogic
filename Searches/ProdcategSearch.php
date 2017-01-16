@@ -15,10 +15,16 @@ use Modules\BusinessLogic\ContentSettings\Prodcateg as ProdObj;
 class ProdcategSearch extends BaseSearch
 {
     public $id;
+    
     public $url;
+    
     public $name;
+    
     public $inputs;
 
+    /**
+     * @return ProdcategSearch
+     */
     public static function createProdcategSearch(){
 
         $search = new ProdcategSearch();
@@ -28,6 +34,9 @@ class ProdcategSearch extends BaseSearch
         return $search;
     }
 
+    /**
+     * @return array
+     */
     public function _readSearch(){
         
         $params = parent::_readSearch();

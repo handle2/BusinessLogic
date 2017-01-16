@@ -14,9 +14,14 @@ use Modules\BusinessLogic\Models\Contents;
 
 class ContentSearch extends BaseSearch
 {
+    
     public $ids;
+    
     public $labels;
 
+    /**
+     * @return ContentSearch
+     */
     public static function createContentSearch(){
 
         $search = new ContentSearch();
@@ -26,6 +31,9 @@ class ContentSearch extends BaseSearch
         return $search;
     }
 
+    /**
+     * @return array
+     */
     public function _readSearch(){
 
         $params = parent::_readSearch();

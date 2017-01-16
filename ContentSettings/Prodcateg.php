@@ -14,11 +14,20 @@ use Modules\BusinessLogic\Models\Prodcategs;
 class Prodcateg extends Base
 {
     public $id;
+    
     public $url;
+    
     public $name;
+    
     public $inputs;
+    
     public $langs;
 
+    /**
+     * @param Prodcategs $obj
+     * @param $lang
+     * @return Prodcateg
+     */
     public function generate(Prodcategs $obj,$lang){
         $prodcateg = new Prodcateg();
         $prodcateg->id = $obj->id;
@@ -30,6 +39,9 @@ class Prodcateg extends Base
         return $prodcateg;
     }
 
+    /**
+     * @return bool
+     */
     public function delete(){
 
         $this->deleteCache($this);
@@ -44,6 +56,9 @@ class Prodcateg extends Base
         }
     }
 
+    /**
+     * @return bool
+     */
     public function save(){
 
         $this->deleteCache($this);

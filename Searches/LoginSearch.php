@@ -14,11 +14,18 @@ use Modules\BusinessLogic\Models\Login;
 class LoginSearch extends BaseSearch
 {
     public $id;
+    
     public $hash;
+    
     public $ip;
+    
     public $userId;
+    
     public $time;
 
+    /**
+     * @return LoginSearch
+     */
     public static function createLoginSearch(){
 
         $search = new LoginSearch();
@@ -28,6 +35,9 @@ class LoginSearch extends BaseSearch
         return $search;
     }
 
+    /**
+     * @return array
+     */
     public function _readSearch(){
         $params = parent::_readSearch();
 

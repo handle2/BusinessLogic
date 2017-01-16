@@ -15,10 +15,16 @@ use Phalcon\Mvc\Collection;
 class Labels extends Collection
 {
     public $id;
+    
     public $name;
+    
     public $code;
+    
     public $langs;
 
+    /**
+     * 
+     */
     public function update(){
 
     }
@@ -27,11 +33,19 @@ class Labels extends Collection
 
     }
 
+    /**
+     * @param $search
+     * @return array
+     */
     public function search($search){
         $found = Labels::find(array("conditions" => $search));
         return $found;
     }
 
+    /**
+     * @param bool $id
+     * @return array|Labels
+     */
     public function create($id = false){
         if($id){
             $found = Labels::findFirst(array("conditions" => array(

@@ -12,13 +12,26 @@ use Modules\BusinessLogic\Models;
 class Role extends Base
 {
     public $name = null;
+
     public $code = null;
+
     public $type = null;
+
     public $id = null;
+
     public $rights = null;
+
     public $roles = null;
+
     public $langs;
-    
+
+
+    /**
+     * Kigenerálja az adatbázisból kiolvasott objektumot egy Role objektummá
+     * @param Models\Roles $obj
+     * @param $lang
+     * @return Role
+     */
     public function generate(Models\Roles $obj,$lang){
         $role = new Role();
         $role->id = $obj->id;
@@ -33,6 +46,10 @@ class Role extends Base
     }
 
 
+    /**
+     * Törli az adatbázisból
+     * @return bool
+     */
     public function delete(){
         
         $this->deleteCache($this);
@@ -47,11 +64,16 @@ class Role extends Base
         }
     }
 
+    /**
+     * Menti a módosításokat az adatbázisba
+     * @return bool
+     */
     public function save(){
 
         $this->deleteCache($this);
 
         $model = new Models\Roles();
+        /** @var Models\Roles $role */
         $role = $model->create($this->id);
         $role->name = $this->name;
         $role->code = $this->code;

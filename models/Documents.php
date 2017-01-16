@@ -15,14 +15,24 @@ use Phalcon\Mvc\Collection;
 class Documents extends Collection
 {
     public $id;
+    
     public $sourceImage;
+    
     public $croppedImage;
+    
     public $bounds;
+    
     public $name;
+    
     public $type;
+    
     public $size;
+    
     public $langs;
 
+    /**
+     * 
+     */
     public function update(){
 
     }
@@ -31,11 +41,19 @@ class Documents extends Collection
 
     }
 
+    /**
+     * @param $search
+     * @return array
+     */
     public function search($search){
         $inputs = Documents::find(array("conditions" => $search));
         return $inputs;
     }
 
+    /**
+     * @param bool $id
+     * @return array|Documents
+     */
     public function create($id = false){
         if($id){
             $found = Documents::findFirst(array("conditions" => array(

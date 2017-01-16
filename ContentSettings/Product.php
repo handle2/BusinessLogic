@@ -12,9 +12,16 @@ use Modules\BusinessLogic\Models\Products;
 class Product extends Base
 {
     public $id;
+
     public $pictureIds;
+
     public $langs;
 
+    /**
+     * @param Products $obj
+     * @param $lang
+     * @return Product
+     */
     public function generate(Products $obj,$lang){
         $product = new Product();
         $langs = (object)$obj->langs;
@@ -26,6 +33,9 @@ class Product extends Base
         return $product;
     }
 
+    /**
+     * @return bool
+     */
     public function delete(){
 
         $this->deleteCache($this);
@@ -41,6 +51,9 @@ class Product extends Base
         }
     }
 
+    /**
+     * @return bool
+     */
     public function save(){
 
         $this->deleteCache($this);
@@ -52,6 +65,10 @@ class Product extends Base
                 $product->{$key} = $this->{$key};
             }
         }
-        $product->save();
+        if($product->save()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

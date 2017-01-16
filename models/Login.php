@@ -13,6 +13,9 @@ use Phalcon\Mvc\Collection;
 
 class Login extends Collection
 {
+    /**
+     * 
+     */
     public function update(){
 
     }
@@ -21,7 +24,10 @@ class Login extends Collection
 
     }
 
-
+    /**
+     * @param bool $hash
+     * @return array|Login
+     */
     public function create($hash = false){
         if($hash){
             $found = Login::findFirst(array("conditions" => array(

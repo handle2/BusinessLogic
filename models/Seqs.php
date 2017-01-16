@@ -6,6 +6,10 @@ use Phalcon\Mvc\Collection;
 
 class Seqs extends Collection
 {
+
+    /**
+     * 
+     */
     public function update(){
 
     }
@@ -14,6 +18,10 @@ class Seqs extends Collection
 
     }
 
+    /**
+     * @param bool $name
+     * @return $this|array
+     */
     public function create($name = false){
         if($name){
             return $this->findFirst(['conditions'=>[

@@ -14,14 +14,27 @@ use Modules\BusinessLogic\Models\Documents;
 class Document extends Base
 {
     public $id;
+
     public $sourceImage;
+
     public $croppedImage;
+
     public $bounds;
+
     public $name;
+
     public $type;
+
     public $size;
+
     public $langs;
-    
+
+
+    /**
+     * @param Documents $obj
+     * @param $lang
+     * @return Document
+     */
     public function generate(Documents $obj,$lang){
         $document = new Document();
         $document->id = $obj->id;
@@ -36,6 +49,10 @@ class Document extends Base
         return $document;
     }
 
+    /**
+     * Törlés
+     * @return bool
+     */
     public function delete(){
 
         $this->deleteCache($this);
@@ -50,6 +67,10 @@ class Document extends Base
         }
     }
 
+    /**
+     * Mentés
+     * @return bool
+     */
     public function save(){
 
         $this->deleteCache($this);

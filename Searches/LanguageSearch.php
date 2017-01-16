@@ -16,9 +16,14 @@ class LanguageSearch extends BaseSearch
 {
 
     public $name;
+    
     public $code;
+    
     public $ids;
 
+    /**
+     * @return LanguageSearch
+     */
     public static function createLanguageSearch(){
         $search = new LanguageSearch();
         $search->model = new Languages();
@@ -27,6 +32,9 @@ class LanguageSearch extends BaseSearch
         return $search;
     }
 
+    /**
+     * @return array
+     */
     public function _readSearch(){
 
         $params = parent::_readSearch();

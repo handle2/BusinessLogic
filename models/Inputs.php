@@ -13,13 +13,22 @@ use Phalcon\Mvc\Collection;
 class Inputs extends Collection
 {
     public $id;
+    
     public $type;
+    
     public $url;
+    
     public $name;
+    
     public $children;
+    
     public $length;
+    
     public $langs;
 
+    /**
+     * 
+     */
     public function update(){
 
     }
@@ -28,11 +37,19 @@ class Inputs extends Collection
 
     }
 
+    /**
+     * @param $search
+     * @return array
+     */
     public function search($search){
         $inputs = Inputs::find(array("conditions" => $search));
         return $inputs;
     }
 
+    /**
+     * @param bool $id
+     * @return array|Inputs
+     */
     public function create($id = false){
         if($id){
             $found = Inputs::findFirst(array("conditions" => array(

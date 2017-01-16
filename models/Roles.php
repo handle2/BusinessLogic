@@ -7,13 +7,22 @@ use Modules\BusinessLogic\ContentSettings;
 class Roles extends Collection
 {
     public $id;
+    
     public $name;
+    
     public $code;
+    
     public $type;
+    
     public $rights;
+    
     public $roles;
+    
     public $langs;
 
+    /**
+     * 
+     */
     public function update(){
 
     }
@@ -22,6 +31,10 @@ class Roles extends Collection
 
     }
 
+    /**
+     * @param bool $id
+     * @return array|Roles
+     */
     public function create($id = false){
         if($id){
             $found = Roles::findFirst(array("conditions" => array(
@@ -36,6 +49,10 @@ class Roles extends Collection
         return $roles;
     }
 
+    /**
+     * @param $search
+     * @return array
+     */
     public function search($search){
         $profile = Roles::find(array("conditions" => $search));
         return $profile;

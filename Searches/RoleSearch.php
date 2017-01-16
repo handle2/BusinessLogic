@@ -14,12 +14,20 @@ use Modules\BusinessLogic\Models;
 class RoleSearch extends BaseSearch
 {
     public $id;
-    public $code;
-    public $type;
-    public $name;
-    public $excludeRoles;
-    public $roles;
     
+    public $code;
+    
+    public $type;
+    
+    public $name;
+    
+    public $excludeRoles;
+    
+    public $roles;
+
+    /**
+     * @return RoleSearch
+     */
     public static function createRoleSearch(){
         
         $search = new RoleSearch();
@@ -29,6 +37,9 @@ class RoleSearch extends BaseSearch
         return $search;
     }
 
+    /**
+     * @return array
+     */
     public function _readSearch(){
         $params = parent::_readSearch();
 

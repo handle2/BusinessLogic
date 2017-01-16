@@ -15,6 +15,10 @@ use Modules\BusinessLogic\Models\Discounts;
 class DiscountSearch extends BaseSearch
 {
     public $ids;
+
+    /**
+     * @return DiscountSearch
+     */
     public static function createDiscountSearch(){
 
         $search = new DiscountSearch();
@@ -24,6 +28,9 @@ class DiscountSearch extends BaseSearch
         return $search;
     }
 
+    /**
+     * @return array
+     */
     public function _readSearch(){
 
         $params = parent::_readSearch();

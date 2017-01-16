@@ -15,6 +15,9 @@ use Modules\BusinessLogic\Models\Products;
 class ProductSearch extends BaseSearch
 {
 
+    /**
+     * @return ProductSearch
+     */
     public static function createProductSearch(){
 
         $search = new ProductSearch();
@@ -24,6 +27,9 @@ class ProductSearch extends BaseSearch
         return $search;
     }
 
+    /**
+     * @return array
+     */
     public function _readSearch(){
 
         $params = parent::_readSearch();

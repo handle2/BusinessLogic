@@ -15,10 +15,16 @@ use Phalcon\Mvc\Collection;
 class Languages extends Collection
 {
     public $id;
+    
     public $name;
+    
     public $code;
+    
     public $langs;
 
+    /**
+     * 
+     */
     public function update(){
 
     }
@@ -27,11 +33,19 @@ class Languages extends Collection
 
     }
 
+    /**
+     * @param $search
+     * @return array
+     */
     public function search($search){
         $found = Languages::find(array("conditions" => $search));
         return $found;
     }
 
+    /**
+     * @param bool $id
+     * @return array|Languages
+     */
     public function create($id = false){
         if($id){
             $found = Languages::findFirst(array("conditions" => array(

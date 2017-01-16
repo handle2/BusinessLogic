@@ -15,14 +15,22 @@ use Modules\BusinessLogic\Models;
 class RightSearch extends BaseSearch
 {
     public $id;
+   
     public $code;
+   
     public $type;
+   
     public $name;
+   
     public $parent;
 
     public $controller;
+    
     public $action;
 
+    /**
+     * @return RightSearch
+     */
     public static function createRightSearch(){
 
         $search = new RightSearch();
@@ -32,6 +40,9 @@ class RightSearch extends BaseSearch
         return $search;
     }
 
+    /**
+     * @return array
+     */
     public function _readSearch(){
         $params = parent::_readSearch();
         //{'actions':{'$elemMatch': {'controller':'right'}}}

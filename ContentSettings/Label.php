@@ -14,10 +14,19 @@ use Modules\BusinessLogic\Models\Labels;
 class Label extends Base
 {
     public $id;
+    
     public $name;
+    
     public $code;
+    
     public $langs;
 
+
+    /**
+     * @param Labels $obj
+     * @param $lang
+     * @return Label
+     */
     public function generate(Labels $obj,$lang){
         $self = new Label();
         $self->id = $obj->id;
@@ -28,6 +37,9 @@ class Label extends Base
         return $self;
     }
 
+    /**
+     * @return bool
+     */
     public function delete(){
 
         $this->deleteCache($this);
@@ -42,6 +54,9 @@ class Label extends Base
         }
     }
 
+    /**
+     * @return bool
+     */
     public function save(){
 
         $this->deleteCache($this);

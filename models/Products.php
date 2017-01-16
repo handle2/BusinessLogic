@@ -15,9 +15,14 @@ use Phalcon\Mvc\Collection;
 class Products extends Collection
 {
     public $id;
+    
     public $pictureIds;
+    
     public $langs;
 
+    /**
+     * 
+     */
     public function update(){
 
     }
@@ -26,11 +31,19 @@ class Products extends Collection
 
     }
 
+    /**
+     * @param $search
+     * @return array
+     */
     public function search($search){
         $products = Products::find(array("conditions" => $search));
         return $products;
     }
 
+    /**
+     * @param bool $id
+     * @return array|Products
+     */
     public function create($id = false){
         if($id){
             $found = Products::findFirst(array("conditions" => array(

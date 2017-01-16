@@ -14,12 +14,23 @@ use Modules\BusinessLogic\Models\Discounts;
 class Discount extends Base
 {
     public $id;
+
     public $type;
+
     public $url;
+
     public $name;
+
     public $value;
+
     public $langs;
 
+    /**
+     * Generálás
+     * @param Discounts $obj
+     * @param $lang
+     * @return Discount
+     */
     public function generate(Discounts $obj,$lang){
         $discount = new Discount();
         $discount->id = $obj->id;
@@ -32,6 +43,10 @@ class Discount extends Base
         return $discount;
     }
 
+    /**
+     * Törlés
+     * @return bool
+     */
     public function delete(){
 
         $this->deleteCache($this);
@@ -46,6 +61,10 @@ class Discount extends Base
         }
     }
 
+    /**
+     * Mentés
+     * @return bool
+     */
     public function save(){
 
         $this->deleteCache($this);

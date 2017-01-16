@@ -14,9 +14,14 @@ use Modules\BusinessLogic\ContentSettings;
 class SeqSearch extends BaseSearch
 {
     public $id;
+    
     public $name;
+    
     public $current;
 
+    /**
+     * @return SeqSearch
+     */
     public static function createSeqSearch(){
 
         $search = new SeqSearch();
@@ -26,6 +31,9 @@ class SeqSearch extends BaseSearch
         return $search;
     }
 
+    /**
+     * @return array
+     */
     public function _readSearch(){
         $params = parent::_readSearch();
 

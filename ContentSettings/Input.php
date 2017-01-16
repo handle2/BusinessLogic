@@ -14,13 +14,25 @@ use Modules\BusinessLogic\Models\Inputs;
 class Input extends Base
 {
     public $id;
+    
     public $type;
+    
     public $url;
+    
     public $name;
+    
     public $children;
+    
     public $length;
+    
     public $langs;
 
+
+    /**
+     * @param Inputs $obj
+     * @param $lang
+     * @return Input
+     */
     public function generate(Inputs $obj,$lang){
         $input = new Input();
         $input->id = $obj->id;
@@ -34,6 +46,9 @@ class Input extends Base
         return $input;
     }
 
+    /**
+     * @return bool
+     */
     public function delete(){
 
         $this->deleteCache($this);
@@ -48,6 +63,10 @@ class Input extends Base
         }
     }
 
+
+    /**
+     * @return bool
+     */
     public function save(){
 
         $this->deleteCache($this);

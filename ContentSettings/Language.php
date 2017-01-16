@@ -14,10 +14,18 @@ use Modules\BusinessLogic\Models\Languages;
 class Language extends Base
 {
     public $id;
+    
     public $name;
+    
     public $code;
+    
     public $langs;
 
+    /**
+     * @param Languages $obj
+     * @param $lang
+     * @return Language
+     */
     public function generate(Languages $obj,$lang){
         $self = new Language();
         $self->id = $obj->id;
@@ -28,6 +36,9 @@ class Language extends Base
         return $self;
     }
 
+    /**
+     * @return bool
+     */
     public function delete(){
 
         $this->deleteCache($this);
@@ -42,6 +53,9 @@ class Language extends Base
         }
     }
 
+    /**
+     * @return bool
+     */
     public function save(){
 
         $this->deleteCache($this);
