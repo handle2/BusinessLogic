@@ -20,6 +20,7 @@ class Document extends Base
     public $name;
     public $type;
     public $size;
+    public $langs;
     
     public function generate(Documents $obj,$lang){
         $document = new Document();
@@ -27,9 +28,11 @@ class Document extends Base
         $document->sourceImage = $obj->sourceImage;
         $document->croppedImage = $obj->croppedImage;
         $document->bounds = $obj->bounds;
-        $document->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;
+        $langs = (object)$obj->langs;
+        $document->name = isset($langs->{$lang}['name'])?$langs->{$lang}['name']:$obj->name;
         $document->type = $obj->type;
         $document->size = $obj->size;
+        $document->langs = $obj->langs;
         return $document;
     }
 
@@ -60,6 +63,7 @@ class Document extends Base
         $document->name = $this->name;
         $document->type = $this->type;
         $document->size = $this->size;
+        $document->langs = $this->langs;
         if($document->save()){
             return true;
         }else{

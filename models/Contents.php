@@ -23,6 +23,7 @@ class Contents extends Collection
     public $pictures;
     public $pictureIds;
     public $labels;
+    public $langs;
 
     public function update(){
 

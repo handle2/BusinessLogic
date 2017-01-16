@@ -15,7 +15,8 @@ use Phalcon\Mvc\Collection;
 class Products extends Collection
 {
     public $id;
-    public $pictureIds; 
+    public $pictureIds;
+    public $langs;
 
     public function update(){
 

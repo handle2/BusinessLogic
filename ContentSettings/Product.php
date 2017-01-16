@@ -13,12 +13,14 @@ class Product extends Base
 {
     public $id;
     public $pictureIds;
+    public $langs;
 
     public function generate(Products $obj,$lang){
         $product = new Product();
+        $langs = (object)$obj->langs;
         foreach ($obj as $key => $prop){
             if($key != '_id'){
-                $product->{$key} = isset($obj->{$lang}[$key])?$obj->{$lang}[$key]:$prop;
+                $product->{$key} = isset($langs->{$lang}[$key])?$langs->{$lang}[$key]:$prop;
             }
         }
         return $product;

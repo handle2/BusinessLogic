@@ -18,14 +18,17 @@ class Discount extends Base
     public $url;
     public $name;
     public $value;
+    public $langs;
 
     public function generate(Discounts $obj,$lang){
         $discount = new Discount();
         $discount->id = $obj->id;
-        $discount->type = isset($obj->{$lang}['type'])?$obj->{$lang}['type']:$obj->type;
-        $discount->url = isset($obj->{$lang}['url'])?$obj->{$lang}['url']:$obj->url;
-        $discount->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;
-        $discount->value = isset($obj->{$lang}['value'])?$obj->{$lang}['value']:$obj->value;
+        $langs = (object)$obj->langs;
+        $discount->type = isset($langs->{$lang}['type'])?$langs->{$lang}['type']:$obj->type;
+        $discount->url = isset($langs->{$lang}['url'])?$langs->{$lang}['url']:$obj->url;
+        $discount->name = isset($langs->{$lang}['name'])?$langs->{$lang}['name']:$obj->name;
+        $discount->value = isset($langs->{$lang}['value'])?$langs->{$lang}['value']:$obj->value;
+        $discount->langs = $obj->langs;
         return $discount;
     }
 
@@ -54,6 +57,7 @@ class Discount extends Base
         $discount->url = $this->urlMakeup($this->url);
         $discount->name = $this->name;
         $discount->value = $this->value;
+        $discount->langs = $this->langs;
         if($discount->save()){
             return true;
         }else{

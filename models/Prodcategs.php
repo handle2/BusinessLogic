@@ -18,6 +18,7 @@ class Prodcategs extends Collection
     public $url;
     public $name;
     public $inputs;
+    public $langs;
 
     public function update(){
 

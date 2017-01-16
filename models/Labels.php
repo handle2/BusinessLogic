@@ -17,6 +17,7 @@ class Labels extends Collection
     public $id;
     public $name;
     public $code;
+    public $langs;
 
     public function update(){
 

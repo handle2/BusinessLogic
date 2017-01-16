@@ -21,6 +21,7 @@ class Documents extends Collection
     public $name;
     public $type;
     public $size;
+    public $langs;
 
     public function update(){
 

@@ -19,6 +19,7 @@ class Discounts extends Collection
     public $url;
     public $name;
     public $value;
+    public $langs;
 
     public function update(){
 

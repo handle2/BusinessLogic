@@ -62,6 +62,8 @@ class BaseSearch
 
     public function find(){
 
+        //$this->onCache = false; // debug
+
         // először megnézzük ,hogy van-e a cacheban ha van akkor visszaadja $this->checkCache('model név+list stb')
 
         /**@var \Predis\Client $cache*/

@@ -18,6 +18,7 @@ class Inputs extends Collection
     public $name;
     public $children;
     public $length;
+    public $langs;
 
     public function update(){
 

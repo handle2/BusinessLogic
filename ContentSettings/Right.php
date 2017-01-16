@@ -19,15 +19,18 @@ class Right extends Base
     public $type;
     public $parent;
     public $actions = [];
+    public $langs;
     
     public function generate(Models\Rights $obj,$lang){
         $right = new Right();
         $right->id = $obj->id;
-        $right->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;
-        $right->parent = isset($obj->{$lang}['parent'])?$obj->{$lang}['parent']:$obj->parent;
-        $right->code = isset($obj->{$lang}['code'])?$obj->{$lang}['code']:$obj->code;
-        $right->type = isset($obj->{$lang}['type'])?$obj->{$lang}['type']:$obj->type;
-        $right->actions = isset($obj->{$lang}['actions'])?$obj->{$lang}['actions']:$obj->actions;
+        $langs = (object)$obj->langs;
+        $right->name = isset($langs->{$lang}['name'])?$langs->{$lang}['name']:$obj->name;
+        $right->parent = isset($langs->{$lang}['parent'])?$langs->{$lang}['parent']:$obj->parent;
+        $right->code = isset($langs->{$lang}['code'])?$langs->{$lang}['code']:$obj->code;
+        $right->type = isset($langs->{$lang}['type'])?$langs->{$lang}['type']:$obj->type;
+        $right->actions = isset($langs->{$lang}['actions'])?$langs->{$lang}['actions']:$obj->actions;
+        $right->langs = $obj->langs;
         return $right;
     }
 
@@ -40,6 +43,7 @@ class Right extends Base
         if($right->type == "group"){
             $wole = $model->find(array('conditions'=>["parent"=>$right->code]));
             foreach ($wole as $w){
+                /**@var Right $w */
                 $w->delete();
             }
         }
@@ -63,6 +67,7 @@ class Right extends Base
         $right->code = $this->code;
         $right->type = $this->type;
         $right->actions = $this->actions;
+        $right->langs = $this->langs;
         if($right->save()){
             return true;
         }else{

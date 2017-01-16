@@ -17,13 +17,16 @@ class Prodcateg extends Base
     public $url;
     public $name;
     public $inputs;
+    public $langs;
 
     public function generate(Prodcategs $obj,$lang){
         $prodcateg = new Prodcateg();
         $prodcateg->id = $obj->id;
-        $prodcateg->url = isset($obj->{$lang}['url'])?$obj->{$lang}['url']:$obj->url;
-        $prodcateg->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;
+        $langs = (object)$obj->langs;
+        $prodcateg->url = isset($langs->{$lang}['url'])?$langs->{$lang}['url']:$obj->url;
+        $prodcateg->name = isset($langs->{$lang}['name'])?$langs->{$lang}['name']:$obj->name;
         $prodcateg->inputs = $obj->inputs;
+        $prodcateg->langs = $obj->langs;
         return $prodcateg;
     }
 
@@ -51,6 +54,7 @@ class Prodcateg extends Base
         $prodcateg->url = $this->urlMakeup($this->url);
         $prodcateg->name = $this->name;
         $prodcateg->inputs = $this->inputs;
+        $prodcateg->langs = $this->langs;
         if($prodcateg->save()){
             return true;
         }else{

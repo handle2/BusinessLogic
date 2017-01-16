@@ -16,12 +16,15 @@ class Language extends Base
     public $id;
     public $name;
     public $code;
+    public $langs;
 
     public function generate(Languages $obj,$lang){
         $self = new Language();
         $self->id = $obj->id;
-        $self->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;
-        $self->code = isset($obj->{$lang}['code'])?$obj->{$lang}['code']:$obj->code;
+        $langs = (object)$obj->langs;
+        $self->name = isset($langs->{$lang}['name'])?$langs->{$lang}['name']:$obj->name;
+        $self->code = isset($langs->{$lang}['code'])?$langs->{$lang}['code']:$obj->code;
+        $self->langs = $obj->langs;
         return $self;
     }
 

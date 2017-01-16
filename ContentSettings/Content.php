@@ -22,18 +22,21 @@ class Content extends Base
     public $pictures;
     public $pictureIds;
     public $labels;
+    public $langs;
     
     public function generate(Contents $obj,$lang){
 
         $content = new Content();
         $content->id = $obj->id;
-        $content->type = isset($obj->{$lang}['type'])?$obj->{$lang}['type']:$obj->type;
-        $content->url = isset($obj->{$lang}['url'])?$obj->{$lang}['url']:$obj->url;
-        $content->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;
-        $content->text = isset($obj->{$lang}['text'])?$obj->{$lang}['text']:$obj->text;
-        $content->lead = isset($obj->{$lang}['lead'])?$obj->{$lang}['lead']:$obj->lead;
+        $langs = (object)$obj->langs;
+        $content->type = isset($langs->{$lang}['type'])?$langs->{$lang}['type']:$obj->type;
+        $content->url = isset($langs->{$lang}['url'])?$langs->{$lang}['url']:$obj->url;
+        $content->name = isset($langs->{$lang}['name'])?$langs->{$lang}['name']:$obj->name;
+        $content->text = isset($langs->{$lang}['text'])?$langs->{$lang}['text']:$obj->text;
+        $content->lead = isset($langs->{$lang}['lead'])?$langs->{$lang}['lead']:$obj->lead;
         $content->pictureIds = $obj->pictureIds;
-        $content->labels = isset($obj->{$lang}['labels'])?$obj->{$lang}['labels']:$obj->labels;
+        $content->labels = isset($langs->{$lang}['labels'])?$langs->{$lang}['labels']:$obj->labels;
+        $content->langs = $obj->langs;
         
         return $content;
     }
@@ -67,6 +70,7 @@ class Content extends Base
         $content->lead = $this->lead;
         $content->pictureIds = $this->pictureIds;
         $content->labels = $this->labels;
+        $content->langs = $this->langs;
         if($content->save()){
             return true;
         }else{

@@ -19,15 +19,18 @@ class Input extends Base
     public $name;
     public $children;
     public $length;
+    public $langs;
 
     public function generate(Inputs $obj,$lang){
         $input = new Input();
         $input->id = $obj->id;
-        $input->type = isset($obj->{$lang}['type'])?$obj->{$lang}['type']:$obj->type;
-        $input->url = isset($obj->{$lang}['url'])?$obj->{$lang}['url']:$obj->url;
-        $input->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;  
+        $langs = (object)$obj->langs;
+        $input->type = isset($langs->{$lang}['type'])?$langs->{$lang}['type']:$obj->type;
+        $input->url = isset($langs->{$lang}['url'])?$langs->{$lang}['url']:$obj->url;
+        $input->name = isset($langs->{$lang}['name'])?$langs->{$lang}['name']:$obj->name;  
         $input->children = $obj->children;
         $input->length = $obj->length;
+        $input->langs = $obj->langs;
         return $input;
     }
 
@@ -57,6 +60,7 @@ class Input extends Base
         $input->name = $this->name;
         $input->children = $this->children;
         $input->length = $this->length;
+        $input->langs = $this->langs;
         if($input->save()){
             return true;
         }else{

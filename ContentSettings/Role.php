@@ -17,15 +17,18 @@ class Role extends Base
     public $id = null;
     public $rights = null;
     public $roles = null;
+    public $langs;
     
     public function generate(Models\Roles $obj,$lang){
         $role = new Role();
         $role->id = $obj->id;
-        $role->name = isset($obj->{$lang}['name'])?$obj->{$lang}['name']:$obj->name;
-        $role->code = isset($obj->{$lang}['code'])?$obj->{$lang}['code']:$obj->code;
-        $role->type = isset($obj->{$lang}['type'])?$obj->{$lang}['type']:$obj->type;
+        $langs = (object)$obj->langs;
+        $role->name = isset($langs->{$lang}['name'])?$langs->{$lang}['name']:$obj->name;
+        $role->code = isset($langs->{$lang}['code'])?$langs->{$lang}['code']:$obj->code;
+        $role->type = isset($langs->{$lang}['type'])?$langs->{$lang}['type']:$obj->type;
         $role->rights = $obj->rights?$obj->rights:[];
         $role->roles = $obj->roles?$obj->roles:[];
+        $role->langs = $obj->langs;
         return $role;
     }
 
@@ -55,6 +58,7 @@ class Role extends Base
         $role->type = $this->type;
         $role->rights = $this->rights;
         $role->roles = $this->roles;
+        $role->langs = $this->langs;
         if($role->save()){
             return true;
         }else{

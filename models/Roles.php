@@ -12,6 +12,7 @@ class Roles extends Collection
     public $type;
     public $rights;
     public $roles;
+    public $langs;
 
     public function update(){
 
