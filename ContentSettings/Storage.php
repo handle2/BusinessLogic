@@ -19,6 +19,14 @@ class Storage extends Base
 
     public $code;
 
+    public $products;
+
+    public $type;
+
+    public $dateFrom;
+
+    public $dateTo;
+
     public $langs;
 
 
