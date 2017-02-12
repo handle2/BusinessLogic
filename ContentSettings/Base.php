@@ -14,7 +14,7 @@ class Base
      */
     public function getPictures(){
         if(!isset($this->pictureIds)){
-            return null;
+            return [];
         }
         $search = DocumentSearch::createDocumentSearch();
         $search->ids = $this->pictureIds;
@@ -47,8 +47,9 @@ class Base
     /**
      * Objektumhoz tartozó cachek törlése
      * @param $obj
+     * @param array $extraFields
      */
-    protected function deleteCache($obj){
+    protected function deleteCache($obj,$extraFields = []){
         $cache = $this->createRedis();
 
         $objectName = explode('\\',get_class($obj));
@@ -57,9 +58,17 @@ class Base
         $keys = $cache->keys('*');
 
         foreach ($keys as $key){
-            if(strpos($key, end($objectName)) !== false){
+            if(strpos($key, end($objectName)) !== false || $this->strposa($key,$extraFields)){
                 $cache->del([$key]);
             }
         }
+    }
+
+    private function strposa($haystack, $needle, $offset=0) {
+        if(!is_array($needle)) $needle = array($needle);
+        foreach($needle as $query) {
+            if(strpos($haystack, $query, $offset) !== false) return true;
+        }
+        return false;
     }
 }

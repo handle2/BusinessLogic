@@ -25,12 +25,13 @@ class Profile extends Base
     
     public $group;
 
+    public $pictureIds;
+
     /**
      * @param $obj
-     * @param $lang
      * @return Profile
      */
-    public function generate($obj,$lang){
+    public function generate($obj){
         $profile = new Profile();
         $profile->id = $obj->id;
         $profile->username = $obj->username;
@@ -39,6 +40,7 @@ class Profile extends Base
         $profile->name = $obj->name;
         $profile->role = $obj->role;
         $profile->group = $obj->group;
+        $profile->pictureIds = $obj->pictureIds;
 
         return $profile;
     }
@@ -57,6 +59,49 @@ class Profile extends Base
         }
         return false;
 
+    }
+
+    /**
+     * Törlés
+     * @return bool
+     */
+    public function delete(){
+
+        $this->deleteCache($this);
+
+        $model = new Models\Profiles();
+        $profile = $model->create($this->id);
+        if($profile->delete()){
+            unset($this);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * Mentés
+     * @return bool
+     */
+    public function save(){
+
+        $this->deleteCache($this);
+
+        $model = new Models\Profiles();
+        /**@var Models\Profiles $profile*/
+        $profile = $model->create($this->id);
+        $profile->id = $this->id;
+        $profile->username = $this->username;
+        $profile->email = $this->email;
+        $profile->name = $this->name;
+        $profile->role = $this->role;
+        $profile->group = $this->group;
+        $profile->pictureIds = $this->pictureIds;
+        if($profile->save()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

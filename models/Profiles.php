@@ -6,6 +6,15 @@ use Phalcon\Mvc\Collection;
 
 class Profiles extends Collection{
 
+    public $id;
+    public $username;
+    public $name;
+    public $email;
+    public $password;
+    public $pictureIds;
+    public $role;
+    public $group;
+
     /**
      * 
      */

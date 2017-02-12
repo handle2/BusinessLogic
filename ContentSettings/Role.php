@@ -70,7 +70,7 @@ class Role extends Base
      */
     public function save(){
 
-        $this->deleteCache($this);
+        $this->deleteCache($this,['Profile']);
 
         $model = new Models\Roles();
         /** @var Models\Roles $role */

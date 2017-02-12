@@ -28,6 +28,8 @@ class ProfileSearch extends BaseSearch
     
     public $group;
 
+    public $availableRoles;
+
     /**
      * @return ProfileSearch
      */
@@ -60,6 +62,12 @@ class ProfileSearch extends BaseSearch
         if($this->name){
             $params['name'] = $this->name;
         }
+
+        if($this->availableRoles && !empty($this->availableRoles)){
+            
+            $params['role'] =  array('$in' => $this->availableRoles);
+        }
+
         if($this->role){
             $params['role'] = $this->role;
         }

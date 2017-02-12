@@ -50,6 +50,10 @@ class BaseSearch
      */
 
     private $onCache = true;
+
+    /** @var string */
+    private $loginCache = null;
+
     private $cacheType = "list";
 
     /**
@@ -100,14 +104,14 @@ class BaseSearch
 
     public function find(){
 
-        //$this->onCache = false; // debug
-
-        // először megnézzük ,hogy van-e a cacheban ha van akkor visszaadja $this->checkCache('model név+list stb')
-
         /**@var \Predis\Client $cache*/
         $cache = $this->createRedis();
 
         $objectName = explode('\\',get_class($this->object));
+
+        if($this->loginCache){
+            $this->cacheType = $this->loginCache."_".$this->cacheType;
+        }
 
         $cacheKey = $this->cacheType.'_'.$this->lang.'_'.end($objectName);
 
@@ -119,6 +123,7 @@ class BaseSearch
         // ha ide jut itt mindig lesz egy cache mentés
 
         $params = array('conditions'=>$this->_readSearch());
+        
         $results = $this->model->find($params);
 
         $items = [];
@@ -173,6 +178,10 @@ class BaseSearch
 
     public function disableCache(){
         $this->onCache = false;
+    }
+
+    public function cacheByLogin($username){
+        $this->loginCache = $username;
     }
 
     /**
