@@ -104,4 +104,16 @@ class Profile extends Base
         }
     }
 
+    public function setPassword($id,$password){
+        $model = new Models\Profiles();
+        /**@var Models\Profiles $profile*/
+        $profile = $model->create($id);
+        $profile->password = $password;
+        if($profile->save()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
