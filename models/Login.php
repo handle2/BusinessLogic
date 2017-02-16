@@ -13,6 +13,11 @@ use Phalcon\Mvc\Collection;
 
 class Login extends Collection
 {
+    public $id;
+    public $hash;
+    public $time;
+    public $userId;
+    public $ip;
     /**
      * 
      */

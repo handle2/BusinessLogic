@@ -29,7 +29,7 @@ class Login extends Base
     public static function createLogin($info){
         $cs = new Login();
         $loginModel = new Models\Login();
-        $login = $loginModel->find(['conditions'=>['ip'=>$info['ip'],'hash'=>$info['hash']]]);
+        $login = $loginModel->findFirst(['conditions'=>['ip'=>$info['ip'],'hash'=>$info['hash']]]);
         if(!$login){
             $login = $loginModel->create();
         }
