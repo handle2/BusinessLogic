@@ -19,6 +19,8 @@ class ContentSearch extends BaseSearch
     
     public $labels;
 
+    public $url;
+
     /**
      * @return ContentSearch
      */
@@ -40,6 +42,9 @@ class ContentSearch extends BaseSearch
         if(isset($this->labels) && !empty($this->labels)){
             //db.test.find({_id: {$in: ids}});
             $params['labels'] = array('$in' => $this->labels);
+        }
+        if(!empty($this->url)){
+            $params['url'] = $this->url;
         }
         return $params;
     }
