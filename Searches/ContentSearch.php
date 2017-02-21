@@ -21,6 +21,11 @@ class ContentSearch extends BaseSearch
 
     public $url;
 
+    /** id kizárás */
+    public $excludeId;
+
+    public $type;
+
     /**
      * @return ContentSearch
      */
@@ -45,6 +50,14 @@ class ContentSearch extends BaseSearch
         }
         if(!empty($this->url)){
             $params['url'] = $this->url;
+        }
+
+        if(!empty($this->excludeId)){
+            $params['id'] = array('$ne' => $this->excludeId);
+        }
+
+        if(!empty($this->type)){
+            $params['type'] = $this->type;
         }
         return $params;
     }

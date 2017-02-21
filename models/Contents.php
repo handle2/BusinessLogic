@@ -34,6 +34,8 @@ class Contents extends Collection
     
     public $langs;
 
+    public $parent;
+
     /**
      * 
      */

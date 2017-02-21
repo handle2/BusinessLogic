@@ -32,6 +32,8 @@ class Content extends Base
     public $labels;
     
     public $langs;
+    
+    public $parent;
 
 
     /**
@@ -51,6 +53,7 @@ class Content extends Base
         $content->text = isset($langs->{$lang}['text'])?$langs->{$lang}['text']:$obj->text;
         $content->lead = isset($langs->{$lang}['lead'])?$langs->{$lang}['lead']:$obj->lead;
         $content->pictureIds = $obj->pictureIds;
+        $content->parent = $obj->parent;
         $content->labels = isset($langs->{$lang}['labels'])?$langs->{$lang}['labels']:$obj->labels;
         $content->langs = $obj->langs;
         
@@ -95,6 +98,7 @@ class Content extends Base
         $content->pictureIds = $this->pictureIds;
         $content->labels = $this->labels;
         $content->langs = $this->langs;
+        $content->parent = $this->parent;
         if($content->save()){
             return true;
         }else{
