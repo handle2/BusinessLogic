@@ -67,7 +67,7 @@ class Content extends Base
     public function delete(){
 
         $this->deleteCache($this);
-
+        $this->deleteDocuments();
         $model = new Contents();
         $content = $model->create($this->id);
         if($content->delete()){

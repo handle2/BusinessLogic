@@ -39,7 +39,7 @@ class Product extends Base
     public function delete(){
 
         $this->deleteCache($this);
-        
+        $this->deleteDocuments();
         $model = new Products();
         $product = $model->create($this->id);
 

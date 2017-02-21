@@ -3,8 +3,10 @@
 namespace Modules\BusinessLogic\ContentSettings;
 
 
+use Modules\BusinessLogic\Models\Documents;
 use Modules\BusinessLogic\Search\DocumentSearch;
 use Phalcon\DI;
+use Phalcon\Mvc\Collection\Document;
 
 class Base
 {
@@ -70,5 +72,16 @@ class Base
             if(strpos($haystack, $query, $offset) !== false) return true;
         }
         return false;
+    }
+
+    protected function deleteDocuments(){
+        if(!isset($this->pictureIds)){
+            return false;
+        }
+        $document = new Documents();
+        foreach ($this->pictureIds as $id){
+            $doc = $document->create($id);
+            $doc->delete();
+        }
     }
 }

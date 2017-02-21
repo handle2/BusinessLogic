@@ -68,7 +68,7 @@ class Profile extends Base
     public function delete(){
 
         $this->deleteCache($this);
-
+        $this->deleteDocuments();
         $model = new Models\Profiles();
         $profile = $model->create($this->id);
         if($profile->delete()){
