@@ -164,6 +164,17 @@ class BaseSearch
         return $result?$this->object->generate($result,$this->lang):false;
     }
 
+    protected function _readAggregation(){
+        $params = array();
+
+        return $params;
+    }
+
+    public function aggregate(){
+        $aggregate = $this->model->aggregate($this->_readAggregation());
+        return $aggregate['result'];
+    }
+
     /**
      * Ezzel lehet módosítani a lekért adatok cache kulcsát
      * @param $name

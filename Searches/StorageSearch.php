@@ -14,6 +14,9 @@ use Modules\BusinessLogic\Models\Storages;
 
 class StorageSearch extends BaseSearch
 {
+
+    public $type;
+
     /**
      * @return StorageSearch
      */
@@ -24,6 +27,22 @@ class StorageSearch extends BaseSearch
         /**@var Storage $object*/
         $search->object = new Storage();
         return $search;
+    }
+
+    protected function _readAggregation(){
+        $params = parent::_readAggregation();
+
+        if(!empty($this->type)){
+            $params[]['$match'] = array(
+                'type' => array('$eq'=> $this->type)
+            );
+        }
+        
+        $params[]['$project'] = array('_id' => 0,'name' => 1,'products' => 1,'id'=>1);
+
+        $params[]['$unwind'] = '$products';
+
+        return $params;
     }
 
     /**
