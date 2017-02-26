@@ -8,6 +8,7 @@
 
 namespace Modules\BusinessLogic\Search;
 
+use Modules\BusinessLogic\ContentSettings\Document;
 use Modules\BusinessLogic\Models;
 use Phalcon\DI;
 
@@ -90,7 +91,12 @@ class BaseSearch
         $params = array('conditions'=>$this->_readSearch());
         $result = $this->model->findFirst($params);
         if($result){
-            return $this->object->generate($result,false);
+            $generated = $this->object->generate($result,false);
+            /** @var Document $picture */
+            foreach($generated->getPictures() as $picture){
+                $generated->pictures[] = $picture->getUrl();
+            }
+            return $generated;
         }else{
             return false;
         }
@@ -128,7 +134,15 @@ class BaseSearch
 
         $items = [];
         foreach ($results as $result){
-            $items[] = $this->object->generate($result,$this->lang);
+            $generated = $this->object->generate($result,$this->lang);
+            
+            /** @var Document $picture */
+            foreach($generated->getPictures() as $picture){
+                    $generated->pictures[] = $picture->getUrl();
+            }
+            
+            $items[] = $generated;
+            
         }
         
         if($this->onCache){

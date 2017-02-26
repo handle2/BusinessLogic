@@ -42,7 +42,7 @@ class Document extends Base
         $document->croppedImage = $obj->croppedImage;
         $document->bounds = $obj->bounds;
         $langs = (object)$obj->langs;
-        $document->name = isset($langs->{$lang}['name'])?$langs->{$lang}['name']:$obj->name;
+        $document->name = isset($langs->{$lang}['name'])?$langs->{$lang}['name']:$this->urlMakeup($obj->name,true);
         $document->type = $obj->type;
         $document->size = $obj->size;
         $document->langs = $obj->langs;
@@ -93,7 +93,7 @@ class Document extends Base
     }
 
     public function getUrl(){
-        $path = './public/images/'.$this->name;
+        $path = './public/images/'.$this->urlMakeup($this->name,true);
         if(!file_exists($path)){
             $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', !empty($this->croppedImage)?$this->croppedImage:$this->sourceImage));
             file_put_contents($path, $data);

@@ -28,12 +28,16 @@ class Base
     /**
      * Url kompatibilissé teszi a szöveget
      * @param $name
+     * @param $picture
      * @return mixed
      */
-    protected function urlMakeup($name){
+    protected function urlMakeup($name,$picture = false){
         $ekezet = array('ö', 'ü', 'ó', 'ő', 'ú', 'ű', 'á', 'é', 'í');
         $normal = array('o', 'u', 'o', 'o', 'u', 'u', 'a', 'e', 'i');
         $text = $url = str_replace($ekezet, $normal, mb_strtolower($name));
+        if($picture){
+            return preg_replace('/[^a-z0-9.]/i', '_', $text);
+        }
         return preg_replace('/[^a-z0-9]/i', '_', $text);
     }
 

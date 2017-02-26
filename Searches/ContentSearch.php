@@ -26,6 +26,8 @@ class ContentSearch extends BaseSearch
 
     public $type;
 
+    public $parent;
+
     /**
      * @return ContentSearch
      */
@@ -58,6 +60,10 @@ class ContentSearch extends BaseSearch
 
         if(!empty($this->type)){
             $params['type'] = $this->type;
+        }
+
+        if(!empty($this->parent)){
+            $params['parent'] = $this->parent;
         }
         return $params;
     }

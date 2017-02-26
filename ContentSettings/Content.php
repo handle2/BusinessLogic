@@ -10,6 +10,7 @@ namespace Modules\BusinessLogic\ContentSettings;
 
 
 use Modules\BusinessLogic\Models\Contents;
+use Modules\BusinessLogic\Search\ContentSearch;
 
 class Content extends Base
 {
@@ -104,5 +105,20 @@ class Content extends Base
         }else{
             return false;
         }
+    }
+    
+    public function getChildren(){
+        $code = $this->url;
+        $search = ContentSearch::createContentSearch();
+        $search->parent = $code;
+        $search->disableCache();
+        return $search->find();
+    }
+
+    public function getParent(){
+        $code = $this->parent;
+        $search = ContentSearch::createContentSearch();
+        $search->url = $code;
+        return $search->findFirst();
     }
 }
