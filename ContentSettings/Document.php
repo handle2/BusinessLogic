@@ -92,12 +92,68 @@ class Document extends Base
         }
     }
 
-    public function getUrl(){
-        $path = './public/images/'.$this->urlMakeup($this->name,true);
-        if(!file_exists($path)){
-            $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', !empty($this->croppedImage)?$this->croppedImage:$this->sourceImage));
-            file_put_contents($path, $data);
+    public function getUrl($aspectRatio = false){
+        /** 
+         * lekérjük a méreteket a configtól
+         * @var  $resolutions */
+        $resolutions = $this->getResolutions();
+        
+        if(isset($resolutions[$aspectRatio])){
+            $width = $resolutions[$aspectRatio]['width'];
+            $height = $resolutions[$aspectRatio]['height'];
+            $dir = './public/images/'.$aspectRatio.'/';
+            $path = $dir.$this->urlMakeup($this->name,true);
+            if(!file_exists($path)){
+                if(!file_exists($dir)){
+                    mkdir('./public/images/'.$aspectRatio,0777);
+                }
+
+                $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', !empty($this->croppedImage)?$this->croppedImage:$this->sourceImage));
+
+                list($width_orig, $height_orig) = getimagesize(!empty($this->croppedImage)?$this->croppedImage:$this->sourceImage);
+
+                $thumb_w = 0;
+                $thumb_h = 0;
+                /*--------------------------------------------------------------*/
+
+                if($width_orig > $height_orig)
+                {
+                    $thumb_w    =   $width;
+                    $thumb_h    =   $height_orig*($height/$width_orig);
+                }
+
+                if($width_orig < $height_orig)
+                {
+                    $thumb_w    =   $width_orig*($width/$height_orig);
+                    $thumb_h    =   $width;
+                }
+
+                if($width_orig == $height_orig)
+                {
+                    $thumb_w    =   $width;
+                    $thumb_h    =   $height;
+                }
+                /*--------------------------------------------------------------*/
+
+
+                $image_p = imagecreatetruecolor($thumb_w, $thumb_h);
+                $image = imagecreatefromstring($data);
+                imagecopyresampled($image_p, $image, 0, 0, 0, 0, $thumb_w, $thumb_h, $width_orig, $height_orig);
+                ob_start();
+                imagepng($image_p, $path, 8);
+                ob_clean();
+            }
+        }else{
+            $path = './public/images/originals/'.$this->urlMakeup($this->name,true);
+            if(!file_exists('./public/images/originals/')){
+                mkdir('./public/images/originals',0777);
+            }
+            if(!file_exists($path)){
+                $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', !empty($this->croppedImage)?$this->croppedImage:$this->sourceImage));
+                file_put_contents($path,$data);
+            }
         }
+
         return substr($path, 1);
 
     }

@@ -107,10 +107,11 @@ class Content extends Base
         }
     }
     
-    public function getChildren(){
+    public function getChildren($imageSize = false){
         $code = $this->url;
         $search = ContentSearch::createContentSearch();
         $search->parent = $code;
+        $search->imageSize = $imageSize;
         $search->disableCache();
         return $search->find();
     }

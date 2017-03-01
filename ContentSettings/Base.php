@@ -51,6 +51,15 @@ class Base
     }
 
     /**
+     * resolution képekhez objektum lekérése
+     * @return mixed
+     */
+    protected function getResolutions(){
+        $di = DI::getDefault();
+        return $di['resolutions'];
+    }
+
+    /**
      * Objektumhoz tartozó cachek törlése
      * @param $obj
      * @param array $extraFields

@@ -58,6 +58,11 @@ class BaseSearch
     private $cacheType = "list";
 
     /**
+     * ezzel lehet megadni ,hogy a generált képek mekkorák legyenek
+     * @var bool  */
+    public $imageSize = false;
+
+    /**
      * a basic keresési feltételeket ő állítja össze
      * @return array
      */
@@ -92,10 +97,16 @@ class BaseSearch
         $result = $this->model->findFirst($params);
         if($result){
             $generated = $this->object->generate($result,false);
-            /** @var Document $picture */
-            foreach($generated->getPictures() as $picture){
-                $generated->pictures[] = $picture->getUrl();
-            }
+
+                /** @var Document $picture */
+                foreach($generated->getPictures() as $picture){
+                    if($this->imageSize){
+                        $generated->pictures[] = $picture->getUrl($this->imageSize);
+                    }else{
+                        $generated->pictures[] = $picture->getUrl();
+                    }
+                }
+
             return $generated;
         }else{
             return false;
@@ -135,10 +146,14 @@ class BaseSearch
         $items = [];
         foreach ($results as $result){
             $generated = $this->object->generate($result,$this->lang);
-            
+
             /** @var Document $picture */
             foreach($generated->getPictures() as $picture){
+                if($this->imageSize){
+                    $generated->pictures[] = $picture->getUrl($this->imageSize);
+                }else{
                     $generated->pictures[] = $picture->getUrl();
+                }
             }
             
             $items[] = $generated;
