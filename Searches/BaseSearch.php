@@ -67,6 +67,8 @@ class BaseSearch
      * @return array
      */
 
+    public $unwind = false;
+
     protected function _readSearch(){
         $params = array();
         
@@ -193,12 +195,16 @@ class BaseSearch
         return $result?$this->object->generate($result,$this->lang):false;
     }
 
+    /**
+     * ez rakja össze a keresési feltételeket a mongonak
+     * */
     protected function _readAggregation(){
         $params = array();
 
         return $params;
     }
 
+    /** spéci kereséseket lehet csinálni vele */
     public function aggregate(){
         $aggregate = $this->model->aggregate($this->_readAggregation());
         return $aggregate['result'];
@@ -220,6 +226,7 @@ class BaseSearch
         $this->onCache = false;
     }
 
+    /** felhasználónevet is belerakja a cache kulcsba */
     public function cacheByLogin($username){
         $this->loginCache = $username;
     }
